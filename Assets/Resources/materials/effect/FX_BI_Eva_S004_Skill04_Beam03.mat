@@ -1,0 +1,83 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: FX_BI_Eva_S004_Skill04_Beam03
+  m_Shader: {fileID: 4800000, guid: fd6ec9bb65a1fd34a9539bc1c14a5c3f, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords:
+  - DeBlackBG
+  m_InvalidKeywords: []
+  m_LightmapFlags: 0
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties:
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+      _BaseMap:
+        m_Texture: {fileID: 2800000, guid: d9ffa2e9120056648972366a5777c9e9, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+      _DissolveTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+      _MaskTex:
+        m_Texture: {fileID: 2800000, guid: d9c531f8ef9d9ff499c4d438a10558fe, type: 3}
+        m_Scale: {x: 0.4, y: 1}
+        m_Offset: {x: 0, y: 0}
+      _TurbulenceTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: {}
+    m_Floats:
+      DstBlend: 10
+      SrcBlend: 5
+      _A_Speed: 0
+      _AnDissolve: -2
+      _B_Speed: 0
+      _BaseMapBrightness: 1
+      _BaseMapPannerX: 0
+      _BaseMapPannerY: 0
+      _BaseMapPower: 0
+      _C_Speed: -5
+      _Cull: 0
+      _Cutoff: 0.895
+      _D_Speed: 0
+      _DeBlackBG: 1
+      _DisSoftness: 0.1
+      _DissolvePannerX: 0
+      _DissolvePannerY: 0
+      _FScale: 1
+      _IsCoustom: 0
+      _IsDoubleFace: 0
+      _IsFresnel: 0
+      _MaskTexPannerX: -4
+      _MaskTexPannerY: 0
+      _RotateSpeed: 1
+      _TurbulenceStrength: 0
+      _TurbulenceTexPannerX: 0
+      _TurbulenceTexPannerY: 0
+      _ZTestMode: 6
+      _ZWrite: 0
+      _stvalue: 1.32
+      _value: 8
+    m_Colors:
+      _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+      _Color: {r: 1, g: 0.51320755, b: 0.5359549, a: 1}
+      _FColor: {r: 1, g: 1, b: 1, a: 1}
+      _FaceInColor: {r: 1, g: 1, b: 1, a: 1}
+      _FaceOurColor: {r: 1, g: 1, b: 1, a: 1}
+      _PointMove: {r: 0, g: 0, b: 0, a: 0}
+  m_BuildTextureStacks: []

@@ -1,0 +1,183 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Cobalt_STR_Glass_03
+  m_Shader: {fileID: 4800000, guid: a4aec8439d1ebf544aee3e8b887d2cca, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 1
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties:
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+      _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+      _MatCap:
+        m_Texture: {fileID: 2800000, guid: b4e16c1c9244edd4fad193e9599f0b7d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: {}
+    m_Floats:
+      _1st2nd_Shades_Feather: 0.0001
+      _1st_ShadeColor_Feather: 0.045
+      _1st_ShadeColor_Step: 0.533
+      _2nd_ShadeColor_Feather: 0.0001
+      _2nd_ShadeColor_Step: 0
+      _Add_Antipodean_RimLight: 0
+      _Ap_RimLight_FeatherOff: 0
+      _Ap_RimLight_Power: 0.1
+      _BaseColor_Step: 0.533
+      _BaseShade_Feather: 0.045
+      _Base_Speed: 0
+      _BlurLevelMatCap: 2.62
+      _BlurLevelMatcap: 2.62
+      _BumpScale: 1
+      _BumpScaleMatcap: 1
+      _CameraRolling_Stabilizer: 1
+      _Clipping_Level: 0.179
+      _ColorShift_Speed: 0
+      _CullMode: 0
+      _Cutoff: 0.5
+      _Cutout: 0.5
+      _DetailNormalMapScale: 1
+      _DstBlend: 10
+      _EMISSIVE: 0
+      _EmissiveValue: 0
+      _Farthest_Distance: 100
+      _GI_Intensity: 0
+      _GlossMapScale: 1
+      _Glossiness: 1
+      _GlossyReflections: 1
+      _HighColor_Power: 0
+      _Inverse_Clipping: 0
+      _Inverse_MatcapMask: 0
+      _Inverse_Z_Axis_BLD: 1
+      _IsBaseMapAlphaAsClippingMask: 0
+      _Is_BLD: 0
+      _Is_BakedNormal: 0
+      _Is_BlendAddToHiColor: 1
+      _Is_BlendAddToMatCap: 1
+      _Is_BlendBaseColor: 0
+      _Is_ColorShift: 0
+      _Is_ColoredMatCapMask: 0
+      _Is_ColoredMatCapMaskMultiply: 0
+      _Is_Filter_HiCutPointLightColor: 1
+      _Is_Filter_LightColor: 0
+      _Is_LightColor_1st_Shade: 1
+      _Is_LightColor_2nd_Shade: 1
+      _Is_LightColor_Ap_RimLight: 1
+      _Is_LightColor_Base: 1
+      _Is_LightColor_HighColor: 1
+      _Is_LightColor_MatCap: 1
+      _Is_LightColor_RimLight: 1
+      _Is_NormalMapForMatCap: 0
+      _Is_NormalMapToBase: 0
+      _Is_NormalMapToHighColor: 0
+      _Is_NormalMapToRimLight: 0
+      _Is_Ortho: 0
+      _Is_OutlineTex: 0
+      _Is_PingPong_Base: 0
+      _Is_SpecularToHighColor: 1
+      _Is_UseTweakHighColorOnShadow: 0
+      _Is_UseTweakMatCapOnShadow: 1
+      _Is_ViewCoord_Scroll: 0
+      _Is_ViewShift: 0
+      _LightDirection_MaskOn: 0
+      _Limit_Unlit_Intensity: 0.15
+      _MatCap: 1
+      _MatCapContrast: 1.53
+      _Metallic: 0
+      _Mode: 3
+      _Nearest_Distance: 0.5
+      _OcclusionStrength: 0.47
+      _Offset_X_Axis_BLD: -0.05
+      _Offset_Y_Axis_BLD: 0.09
+      _Offset_Z: 0.02
+      _Outline_Width: 0
+      _Parallax: 0.005
+      _PowVal: 1.02
+      _RampSmooth: 0.2
+      _RampSmoothAdd: 0.2
+      _RampThreshold: 0.5
+      _RimLight: 0
+      _RimLight_FeatherOff: 0
+      _RimLight_InsideMask: 0.0001
+      _RimLight_Power: 0.1
+      _RimMax: 0.806
+      _RimMin: 0.791
+      _RimStrength: 0.5
+      _Rotate_EmissiveUV: 0
+      _Rotate_MatCapUV: 0
+      _Rotate_NormalMapForMatCapUV: 0
+      _Roughness1: 1
+      _Scroll_EmissiveU: 0
+      _Scroll_EmissiveV: 0
+      _Set_SystemShadowsToBase: 1
+      _ShadeColor_Step: 0
+      _Smoothness: 1
+      _SmoothnessTextureChannel: 1
+      _SpecBlend: 1
+      _SpecSmooth: 1
+      _SpecularHighlights: 1
+      _SrcBlend: 1
+      _StepOffset: 0
+      _TCP2_DISABLE_WRAPPED_LIGHT: 0
+      _TCP2_RAMPTEXT: 0
+      _TCP2_SPEC_TOON: 1
+      _TCP2_STYLIZED_FRESNEL: 1
+      _TweakHighColorOnShadow: 0
+      _TweakMatCapOnShadow: 0.146
+      _Tweak_HighColorMaskLevel: 0
+      _Tweak_LightDirection_MaskLevel: 0
+      _Tweak_MatCapUV: 0
+      _Tweak_MatcapMaskLevel: 0
+      _Tweak_RimLightMaskLevel: 0
+      _Tweak_SystemShadowsLevel: 0
+      _Tweak_transparency: -0.864
+      _UVSec: 0
+      _Unlit_Intensity: 1
+      _Use_1stAs2nd: 0
+      _Use_BaseAs1st: 1
+      _ZTestMode: 4
+      _ZWrite: 0
+      __dirty: 1
+      _simpleUI: 0
+      _utsTechnique: 0
+      _utsVersion: 2.072
+    m_Colors:
+      _1st_ShadeColor: {r: 0.21057314, g: 0.24057668, b: 0.26415092, a: 0.57254905}
+      _2nd_ShadeColor: {r: 0.1509434, g: 0.12317551, b: 0.12317551, a: 1}
+      _AddColor: {r: 0, g: 0.037735857, b: 0.1132075, a: 1}
+      _Ap_RimLightColor: {r: 1, g: 1, b: 1, a: 1}
+      _BaseColor: {r: 0.21506757, g: 0.23825869, b: 0.2547169, a: 0.78039217}
+      _Color: {r: 0.06741898, g: 0.06741898, b: 0.09899997, a: 0.78039217}
+      _ColorShift: {r: 0, g: 0, b: 0, a: 1}
+      _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+      _EmissiveColor: {r: 0, g: 0, b: 0, a: 0}
+      _Emissive_Color: {r: 0, g: 0, b: 0, a: 1}
+      _HColor: {r: 1, g: 1, b: 1, a: 1}
+      _HighColor: {r: 1, g: 1, b: 1, a: 1}
+      _MatCapColor: {r: 0.4640192, g: 0.4619082, b: 0.5660378, a: 1}
+      _Outline_Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+      _OverColor: {r: 0, g: 0, b: 0, a: 0}
+      _RimColor: {r: 0.8, g: 0.8, b: 0.8, a: 0.6}
+      _RimLightColor: {r: 1, g: 1, b: 1, a: 1}
+      _SColor: {r: 0.40383586, g: 0.4681859, b: 0.5188679, a: 1}
+      _SpecColor: {r: 0.8584906, g: 0.8058473, b: 0.8058473, a: 1}
+      _ViewShift: {r: 0, g: 0, b: 0, a: 1}
+  m_BuildTextureStacks: []

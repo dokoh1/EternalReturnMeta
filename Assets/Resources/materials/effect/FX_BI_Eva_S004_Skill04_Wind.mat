@@ -1,0 +1,210 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: FX_BI_Eva_S004_Skill04_Wind
+  m_Shader: {fileID: 4800000, guid: dffa1029d0c423c40b4c01e445bff983, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 0
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties:
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+      _B_tex:
+        m_Texture: {fileID: 2800000, guid: cd3cf98db00c76a4cbfabaccc2ce3f8e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+      _G_tex:
+        m_Texture: {fileID: 2800000, guid: d616320a2bc4b264e890c24c8cd26bad, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+      _R_tex:
+        m_Texture: {fileID: 2800000, guid: 6f1e44765801be1409d2dff8195104f2, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: {}
+    m_Floats:
+      DstBlend: 10
+      SrcBlend: 5
+      _A_Speed: -2
+      _Amount: 0.311
+      _AnDissolve: -2
+      _B_Speed: 0
+      _BaseMapBrightness: 1
+      _BaseMapPannerX: 0
+      _BaseMapPannerY: 0
+      _BaseMapPower: 1
+      _BlackAmount: 1
+      _BlendOp: 0
+      _BumpScale: 1
+      _C_Speed: 0
+      _CameraFadingEnabled: 0
+      _CameraFarFadeDistance: 2
+      _CameraNearFadeDistance: 1
+      _ChromaticAberration: 0.1
+      _ColorMode: 0
+      _Cull: 2
+      _CustomVertexSt: 0
+      _Cutoff: 0.463
+      _D_Speed: 0
+      _DeBlackBG: 0
+      _DecalMultiply: 50
+      _Density: 22.23
+      _Depth: -4
+      _DetailNormalMapScale: 1
+      _DisSoftness: 0.1
+      _DissolveColor: 1
+      _DissolvePannerX: 0
+      _DissolvePannerY: 0
+      _DistortionBlend: 0.5
+      _DistortionEnabled: 0
+      _DistortionStrength: 1
+      _DistortionStrengthScaled: 0.1
+      _DstBlend: 1
+      _DstBlendTCP2: 10
+      _EdgeDistance: 1
+      _EdgeGlowContrast: 1.7
+      _EdgeGlowMultiply: 0
+      _EdgeGlowPulseSpeed: 49.3
+      _EdgePower: 1
+      _EmissStrength: 1
+      _Emissin: 3.62
+      _EmissionEnabled: 0
+      _EsdgeFormTile: 1
+      _FScale: 1
+      _FlipbookMode: 0
+      _Float0: 8.998061
+      _Float1: 10
+      _Float2: 0.43
+      _Float3: 10
+      _FlowSpeed: 0.5
+      _FlowStrength: 0.2
+      _GlossMapScale: 1
+      _Glossiness: 0.5
+      _GlossyReflections: 1
+      _HighlightMultiplier: 0.98
+      _InvFade: 1
+      _IsCoustom: 0
+      _IsDoubleFace: 0
+      _IsFresnel: 0
+      _IsPart: 0
+      _KeepEdge_NonFlowmap: 0
+      _LightingEnabled: 1
+      _LightingFactor: 1
+      _MKGlowPower: 1
+      _MKGlowTexStrength: 1
+      _MaskTexPannerX: 0
+      _MaskTexPannerY: 0
+      _Metallic: 0
+      _Mode: 1
+      _MosaicStrength: 1.03
+      _NormalSpeed: 1
+      _NormalStreght: 1
+      _NormalTile: 1
+      _OcclusionStrength: 1
+      _Parallax: 0.02
+      _PrimaryMutiply: 49.7
+      _RampSmooth: 0.214
+      _RampThreshold: 0.631
+      _RefractAmount: 0.1
+      _RefractionStrength: 1
+      _RotateSpeed: 0
+      _RoughnessLerpA: 1
+      _RoughnessLerpB: 0.802
+      _SeaFormTile: 1
+      _SecondaryMultiply: 50
+      _ShadowMultiplier: 0.67
+      _SharpEdge: 0
+      _SmoothnessTextureChannel: 0
+      _SoftParticleDistanceFade: 0.1
+      _SoftParticlesEnabled: 0
+      _SoftParticlesFarFadeDistance: 22.48
+      _SoftParticlesNearFadeDistance: 4.77
+      _SpecularHighlights: 1
+      _Speed: 7.25
+      _SrcBlend: 1
+      _SrcBlendTCP2: 5
+      _TurbulenceStrength: 0
+      _TurbulenceTexPannerX: 0
+      _TurbulenceTexPannerY: 0
+      _U: 0
+      _U2speed: 0.67
+      _UVSec: 0
+      _U_copy: 0
+      _UsageStage: 0
+      _UsageType: 0
+      _UseTime: 0
+      _Uspeed: 1.43
+      _V: 0.22
+      _V2speed: 0.05
+      _V_copy: 0.76
+      _Vspeed: 0.8
+      _WaveHeight: 1
+      _WaveSpeed: 1
+      _WrapFactor: 1.65
+      _ZTestMode: 2
+      _ZWrite: 1
+      _Zwrite: 0
+      __dirty: 0
+      __dummy__: 0
+      _center: 0
+      _dissolve: 0.071
+      _hard: 1.21
+      _node_2252: 0.084
+      _node_7998: 0.09
+      _node_9393: 2.49
+      _opacity: 1.6
+      _power: 1.34
+      _rot1: 0
+      _rot2: 0
+      _speed: 0.948
+      _strench: 0.96
+      _stvalue: 5
+      _tex1U: 0
+      _tex1V: 0
+      _tex2U: 0.24
+      _tex2V: 0.68
+      _tex2pow: 0.04
+      _u: 4.81
+      _v: -0.74
+      _value: 2
+      _wavetile: 1
+    m_Colors:
+      _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+      _BottomColor: {r: 0.32395867, g: 0.59656096, b: 0.75471693, a: 1}
+      _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
+      _Color: {r: 0.16078433, g: 0.32444966, b: 0.44313726, a: 1}
+      _ColorAddSubDiff: {r: 0, g: 0, b: 0, a: 0}
+      _Decalcolor: {r: 1, g: 0.7676166, b: 0, a: 1}
+      _EdgeGlowColor: {r: 0, g: 0.6297672, b: 1, a: 1}
+      _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+      _FColor: {r: 1, g: 1, b: 1, a: 1}
+      _FaceInColor: {r: 1, g: 1, b: 1, a: 1}
+      _FaceOurColor: {r: 1, g: 1, b: 1, a: 1}
+      _HColor: {r: 0.785, g: 0.785, b: 0.785, a: 1}
+      _MKGlowColor: {r: 1, g: 1, b: 1, a: 1}
+      _MKGlowTexColor: {r: 1, g: 1, b: 1, a: 1}
+      _PointMove: {r: 0, g: 0, b: 0, a: 0}
+      _PrimayColor: {r: 0.6223836, g: 0, b: 1, a: 1}
+      _SColor: {r: 0.19499996, g: 0.19499996, b: 0.19499996, a: 1}
+      _SecondaryColor: {r: 1, g: 1, b: 1, a: 1}
+      _SoftParticleFadeParams: {r: 0, g: 0, b: 0, a: 0}
+      _SolveGlowColor: {r: 1, g: 1, b: 1, a: 1}
+      _TintColor: {r: 0.9716981, g: 0.921873, b: 0.875445, a: 1}
+      _TopColor: {r: 0.28862578, g: 0.8052982, b: 0.8867924, a: 0}
+      _node_2580: {r: 1, g: 0.6652649, b: 0, a: 1}
+      _node_710: {r: 1, g: 1, b: 1, a: 1}
+  m_BuildTextureStacks: []

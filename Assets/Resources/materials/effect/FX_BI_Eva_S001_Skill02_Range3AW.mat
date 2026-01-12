@@ -1,0 +1,151 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: FX_BI_Eva_S001_Skill02_Range3AW
+  m_Shader: {fileID: 4800000, guid: b8b9bb0593960b543b368758d0a7c473, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 0
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: 2000
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties:
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+      _MainTex:
+        m_Texture: {fileID: 2800000, guid: 8d169cae2cff70c4fa2d6d9c485fbbd1, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: {}
+    m_Floats:
+      DstBlend: 2
+      SrcBlend: 1
+      _A_Speed: 0
+      _Alpha: 1
+      _AlphaMaskAffect: 0.5
+      _AlphaMaskFeature: 0
+      _AnDissolve: -2
+      _B_Speed: 0
+      _BaseMapBrightness: 1
+      _BaseMapPannerX: 0
+      _BaseMapPannerY: 0
+      _BaseMapPower: 1
+      _C_Speed: 0.26
+      _ChromaDisteance: 0.005
+      _ColorGlitchAffect: 0.5
+      _ColorGlitchFeature: 0
+      _Cull: 0
+      _CullMode: 2
+      _Cutoff: 0.423
+      _D_Speed: -1.12
+      _DeBlackBG: 0
+      _DisSoftness: 0.1
+      _DissolveFeature: 0
+      _DissolveHide: -1
+      _DissolvePannerX: 0
+      _DissolvePannerY: 0
+      _FScale: 1
+      _FresnelAlphaPower: 2
+      _FresnelAlphaScale: 1
+      _FresnelFeature: 0
+      _FresnelPower: 2
+      _FresnelScale: 1
+      _Glow: 0
+      _GrainAffect: 1
+      _GrainFeature: 0
+      _IsCoustom: 0
+      _IsDoubleFace: 0
+      _IsFresnel: 0
+      _Line1Alpha: 0.15
+      _Line1Feature: 0
+      _Line1Frequency: 100
+      _Line1Hardness: 1.45
+      _Line1InvertedThickness: 0
+      _Line1Speed: -3.57
+      _Line2Alpha: 0.1
+      _Line2Feature: 0
+      _Line2Frequency: 1
+      _Line2Hardness: 2
+      _Line2InvertedThickness: 0.255
+      _Line2Speed: -1
+      _LineBothFeature: 0
+      _LineGlitchFeature: 0
+      _LineGlitchFrequency: 0.2
+      _LineGlitchHardness: 5
+      _LineGlitchInvertedThickness: 0.825
+      _LineGlitchSpeed: -0.26
+      _MaskFalloff: 0
+      _MaskFeature: 0
+      _MaskInversion: 0
+      _MaskLocalFeature: 0
+      _MaskTexPannerX: 0
+      _MaskTexPannerY: 0
+      _MulVal_alpha: 1
+      _MulVal_rgb: 5
+      _NormalAffect: 0
+      _NormalMapFeature: 0
+      _NormalScale: 0
+      _PositionDirection: 1
+      _PositionFeature: 1
+      _PositionSpaceFeature: 0
+      _RandomGlitchAmount: 0.089
+      _RandomGlitchConstant: 0
+      _RandomGlitchFeature: 0
+      _RandomGlitchTiling: 2.83
+      _RandomOffset: 0
+      _RotateSpeed: 0
+      _Saturate: -3
+      _SoftIntersection1Affect: 1
+      _SoftIntersection1Distance: 0
+      _SoftIntersection1Feature: 0
+      _SoftIntersection1Intensity: 1
+      _SoftIntersection2Affect: 1
+      _SoftIntersection2Distance: 0
+      _SoftIntersection2Feature: 0
+      _SoftIntersection2Intensity: 1
+      _Speed: 1
+      _TurbulenceStrength: 0.03
+      _TurbulenceTexPannerX: 0.3
+      _TurbulenceTexPannerY: 0
+      _U: 0
+      _U_copy: 0
+      _V: -1.15
+      _V_copy: 0
+      _Voxelization: 100
+      _VoxelizationAffect: 1
+      _VoxelizationFeature: 0
+      _ZTestMode: 6
+      _ZWrite: 0
+      __dirty: 0
+      _power: 0.44
+      _stvalue: 3.85
+      _value: 1
+    m_Colors:
+      _BaseColor: {r: 2, g: 2, b: 2, a: 1}
+      _Color: {r: 1, g: 1, b: 1, a: 1}
+      _DissolveScale: {r: 0.1, g: 1.01, b: 5, a: 0}
+      _FColor: {r: 1, g: 1, b: 1, a: 1}
+      _FaceInColor: {r: 1, g: 1, b: 1, a: 1}
+      _FaceOurColor: {r: 1, g: 1, b: 1, a: 1}
+      _GlitchTexTiling: {r: 1, g: 1, b: 0, a: 0}
+      _GrainScale: {r: 50, g: 50, b: 50, a: 0}
+      _GrainValues: {r: 0, g: 1, b: 0, a: 0}
+      _LineGlitchOffset: {r: 0.03, g: 0, b: 0, a: 0}
+      _MainColor: {r: 0.620945, g: 1.420074, b: 3.953349, a: 0.05098039}
+      _MainTilingSpeed: {r: 1, g: 1, b: 0, a: 0}
+      _MaskCenter: {r: 0, g: 0, b: 0, a: 0}
+      _MaskSize: {r: 0, g: 0, b: 0, a: 0}
+      _PointMove: {r: 0, g: 0, b: 0, a: 0}
+      _RandomGlitchOffset: {r: -0.5, g: 0, b: 0, a: 0}
+  m_BuildTextureStacks: []

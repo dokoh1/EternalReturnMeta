@@ -1,0 +1,91 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: FX_BI_Eva_S004_Skill04_Range04AW
+  m_Shader: {fileID: 4800000, guid: d9cf2d472e7f7e242b6a4a4740a94612, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 0
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: 2000
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties:
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+      _GradientMask:
+        m_Texture: {fileID: 2800000, guid: 4ddee5b268832144daab1305318c8bbd, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+      _GradientTex:
+        m_Texture: {fileID: 2800000, guid: 4ddee5b268832144daab1305318c8bbd, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+      _Noise2Tex:
+        m_Texture: {fileID: 2800000, guid: cd3cf98db00c76a4cbfabaccc2ce3f8e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+      _NoiseTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+      _TileTex:
+        m_Texture: {fileID: 2800000, guid: d9c531f8ef9d9ff499c4d438a10558fe, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: {}
+    m_Floats:
+      _BumpScale: 1
+      _ChromaticAberration: 0.1
+      _Cull: 0
+      _Cutoff: 0.5
+      _DetailNormalMapScale: 1
+      _DstBlend: 0
+      _Float0: 0
+      _GlossMapScale: 1
+      _Glossiness: 0.5
+      _GlossyReflections: 1
+      _Metallic: 0
+      _Mode: 0
+      _Noise: 0.5
+      _Noise2Intensity: 0.1
+      _NoiseIntensity: 0.2
+      _OcclusionStrength: 1
+      _Parallax: 0.02
+      _SmoothnessTextureChannel: 0
+      _SpecularHighlights: 1
+      _SrcBlend: 1
+      _TileMultiply: 1
+      _UVSec: 0
+      _UseCustomOffet: -0.8
+      _ZTestMode: 6
+      _ZWrite: 0
+      __dirty: 0
+    m_Colors:
+      _1: {r: 1, g: 1, b: 0.5, a: -0.5}
+      _Clamp: {r: 0, g: 1, b: 0, a: 0}
+      _Color: {r: 1, g: 1, b: 1, a: 1}
+      _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+      _GradientControl: {r: 0.51, g: 0.21, b: 0, a: 0}
+      _GradientCoodinates: {r: 1, g: 0.18, b: 0, a: 0}
+      _GradientCoord: {r: 1, g: -0.37, b: 0, a: 0}
+      _LenMutiply: {r: 100, g: 50, b: 30, a: 2.98}
+      _Noise2UV: {r: 1, g: 1, b: 0.2, a: -0.3}
+      _NoiseUV: {r: 0, g: 0, b: 0.5, a: 0}
+      _Param: {r: 1, g: 0, b: 0, a: 0}
+      _Refraction: {r: 0, g: 0, b: -1, a: 10}
+      _TileControl: {r: 0.32, g: -1.26, b: 5.87, a: 0}
+      _TileUV: {r: 0.6, g: 1, b: -0.1, a: -0.2}
+      _UV: {r: 1, g: 1, b: -0.57, a: -0.13}
+      _UVClamp: {r: 1, g: 1, b: 0, a: 0}
+  m_BuildTextureStacks: []

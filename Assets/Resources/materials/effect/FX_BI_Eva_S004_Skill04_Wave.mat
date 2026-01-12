@@ -1,0 +1,114 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: FX_BI_Eva_S004_Skill04_Wave
+  m_Shader: {fileID: 4800000, guid: fd6ec9bb65a1fd34a9539bc1c14a5c3f, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 0
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties:
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+      _BaseMap:
+        m_Texture: {fileID: 2800000, guid: d9c531f8ef9d9ff499c4d438a10558fe, type: 3}
+        m_Scale: {x: 0.6, y: 0.41}
+        m_Offset: {x: 0, y: 0}
+      _DissolveTex:
+        m_Texture: {fileID: 2800000, guid: e44d0e430125c7844967cf9eac176602, type: 3}
+        m_Scale: {x: 0.6, y: 0.6}
+        m_Offset: {x: 0, y: 0}
+      _MaskTex:
+        m_Texture: {fileID: 2800000, guid: 7abe4be2dc448024cb91a08a4d180ddd, type: 3}
+        m_Scale: {x: -1, y: 1}
+        m_Offset: {x: 1, y: 0}
+      _TurbulenceTex:
+        m_Texture: {fileID: 2800000, guid: d9c531f8ef9d9ff499c4d438a10558fe, type: 3}
+        m_Scale: {x: 0.3, y: 0.3}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: {}
+    m_Floats:
+      DstBlend: 10
+      SrcBlend: 5
+      _AnDissolve: -0.13
+      _BaseMapBrightness: 5
+      _BaseMapPannerX: 0.3
+      _BaseMapPannerY: 0
+      _BaseMapPower: 0.64
+      _BumpScale: 1
+      _ChromaDisteance: 0.002
+      _Cull: 0
+      _CustomVertexStreams: 0
+      _Cutoff: 0.5
+      _DeBlackBG: 0
+      _DetailNormalMapScale: 1
+      _DisSoftness: 2
+      _DissolvePannerX: 0
+      _DissolvePannerY: 0.1
+      _DistortionFactor: 0.1
+      _DstBlend: 0
+      _FScale: 1
+      _Float3: 0
+      _GlossMapScale: 1
+      _Glossiness: 0.5
+      _GlossyReflections: 1
+      _Glow: 7
+      _IsCoustom: 0
+      _IsDoubleFace: 0
+      _IsFresnel: 0
+      _MaskTexPannerX: 0
+      _MaskTexPannerY: 0
+      _Metallic: 0
+      _Mode: 0
+      _MulVal_alpha: 3
+      _MulVal_rgb: 5
+      _Noise: 0.1
+      _OcclusionStrength: 1
+      _Parallax: 0.02
+      _Saturate: -3
+      _SmoothnessTextureChannel: 0
+      _SpecularHighlights: 1
+      _SrcBlend: 1
+      _TurbulenceStrength: 0.15
+      _TurbulenceTexPannerX: -0.2
+      _TurbulenceTexPannerY: 0
+      _UVSec: 0
+      _ZTestMode: 6
+      _ZWrite: 1
+      __dirty: 0
+    m_Colors:
+      _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+      _Color: {r: 1, g: 1, b: 1, a: 1}
+      _DistortionPanSpeed: {r: 0, g: -0.2, b: 0, a: 0}
+      _DistortionTile: {r: 2, g: 0.3, b: 0, a: 0}
+      _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+      _FColor: {r: 1, g: 1, b: 1, a: 1}
+      _FaceInColor: {r: 1, g: 1, b: 1, a: 1}
+      _FaceOurColor: {r: 1, g: 1, b: 1, a: 1}
+      _GlitchTexTiling: {r: 1, g: 1, b: 0, a: 0}
+      _MainTexUV_TilingSpeed: {r: 1, g: 1, b: 0, a: 0}
+      _MainTilingSpeed: {r: 1, g: 1, b: 0, a: 0}
+      _MaskUV_Tiling: {r: 1, g: 1, b: 0, a: 0}
+      _Mask_Offset: {r: 0, g: 0, b: 0, a: 0}
+      _Noise01UV_TilingSpeed: {r: 0.5, g: 0.5, b: -0.15, a: -0.15}
+      _Noise02UV_TilingSpeed: {r: 0, g: 0, b: 0, a: 0}
+      _OutColor: {r: 1, g: 1, b: 1, a: 1}
+      _PointMove: {r: 0, g: 0, b: 0, a: 0}
+      _SmoothStep1: {r: 0, g: 0.8, b: 0, a: 0}
+      _SmoothStep2: {r: 0.92, g: 0.92, b: 0, a: 0}
+      _Tex1PanSpeed: {r: 0, g: -0.2, b: 0, a: 0}
+      _Tex1Tile: {r: 2, g: 0.3, b: 0, a: 0}
+  m_BuildTextureStacks: []
