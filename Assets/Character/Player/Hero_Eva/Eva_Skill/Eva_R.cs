@@ -7,23 +7,24 @@ using UnityEngine;
 public class Eva_R : NetworkBehaviour
 {
     private PlayerRef owner;
+    private Eva_Skill ownerSkill;  // VF 라이트 체크용
     private CancellationTokenSource _cts;
     [SerializeField] private GameObject HitVFX;
-    
+
     private void Awake()
     {
         Utility.RefreshToken(ref _cts);
     }
-    
-    public void Init(PlayerRef player)
+
+    public void Init(PlayerRef player, Eva_Skill skill = null)
     {
         owner = player;
-        Debug.Log($"구체의 주인 : {owner}");
+        ownerSkill = skill;
     }
 
     public async UniTaskVoid ActiveInit()
     {
-        await UniTask.Delay(500);
+        await UniTask.Delay(200);
         
         if (this == null || gameObject == null) return;
         
@@ -36,18 +37,18 @@ public class Eva_R : NetworkBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
+        // 서버에서만 데미지 처리
+        if (!HasStateAuthority) return;
+
         if(other.GetComponentInParent<NetworkObject>() == null) return;
         // 주인이 맞았다면
         if (other.GetComponentInParent<NetworkObject>().InputAuthority == owner)
         {
-            //Debug.Log($"구체의 오너 : {owner} || 맞은넘 : {other.GetComponentInParent<NetworkObject>().InputAuthority} ==> 내꺼니까 무시할게");
             return;
         }
-        
-        Debug.Log($"구체의 오너 : {owner} || 맞은넘 : {other.GetComponentInParent<NetworkObject>().InputAuthority} ==> 데미지 줄게");
-     
+
         DamageLoop(other, _cts.Token).Forget();
-        
+
     }
 
     private void OnTriggerExit(Collider other)
@@ -66,14 +67,29 @@ public class Eva_R : NetworkBehaviour
 
     private async UniTaskVoid DamageLoop(Collider other, CancellationToken token)
     {
+        if (other == null) return;
+
         IDamageProcess damageProcess = other.GetComponent<IDamageProcess>();
-        
-        while (damageProcess != null && other.GetComponent<HeroState>().GetCurrHealth() > 0f)
+        var targetNO = other.GetComponentInParent<NetworkObject>();
+        var heroState = other.GetComponent<HeroState>();
+
+        // null 체크
+        if (damageProcess == null || heroState == null) return;
+
+        while (heroState != null && heroState.GetCurrHealth() > 0f)
         {
+            // 오브젝트 유효성 체크
+            if (this == null || other == null || Runner == null) break;
+
             damageProcess.OnTakeDamage(2f);
-            Debug.Log(other.GetComponent<HeroState>().GetCurrHealth());
-            
-            if (Runner.IsServer)
+
+            // VF 라이트 투사체 발사 (매 히트마다)
+            if (ownerSkill != null && targetNO != null)
+            {
+                ownerSkill.TryApplyVFLight(targetNO);
+            }
+
+            if (Runner != null && Runner.IsServer && HitVFX != null)
             {
                 var no = Runner.Spawn(HitVFX, other.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
                 if (no != null)
@@ -82,7 +98,7 @@ public class Eva_R : NetworkBehaviour
                 }
             }
             await UniTask.Delay(100, cancellationToken:token).SuppressCancellationThrow();
-            
+
             if(token.IsCancellationRequested)
                 break;
         }

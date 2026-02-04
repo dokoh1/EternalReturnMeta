@@ -14,7 +14,7 @@ public class HeroState : NetworkBehaviour
     
     public override void Spawned()
     {
-        MaxHealth = 100;
+        MaxHealth = 10000;
         CurrHealth = MaxHealth;
     }
 

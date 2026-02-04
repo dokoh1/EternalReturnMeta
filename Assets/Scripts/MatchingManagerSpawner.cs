@@ -137,6 +137,24 @@ public class MatchingManagerSpawner : MonoBehaviour , INetworkRunnerCallbacks
             {
                 _heroInput.HitPosition_RightClick = hit.point;
             }
+
+            // 적 탐지 레이캐스트 추가 (Character 레이어)
+            if (Physics.Raycast(ray, out var enemyHit, Mathf.Infinity, LayerMask.GetMask("Character")))
+            {
+                var targetNO = enemyHit.collider.GetComponentInParent<NetworkObject>();
+                if (targetNO != null && targetNO.InputAuthority != _runner.LocalPlayer)
+                {
+                    _heroInput.TargetNetworkId = targetNO.Id;
+                }
+                else
+                {
+                    _heroInput.TargetNetworkId = default;
+                }
+            }
+            else
+            {
+                _heroInput.TargetNetworkId = default;
+            }
         }
 
         if (keyboard.qKey.isPressed || keyboard.wKey.isPressed || keyboard.eKey.isPressed || keyboard.rKey.isPressed)

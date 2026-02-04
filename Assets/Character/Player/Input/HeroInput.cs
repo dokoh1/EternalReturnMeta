@@ -19,4 +19,6 @@ public struct HeroInput : INetworkInput
 
     public PlayerRef Owner;
     public Vector3 MousePosition;
+
+    public NetworkId TargetNetworkId;  // 클릭한 적 ID
 }

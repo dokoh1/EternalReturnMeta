@@ -9,12 +9,13 @@ public class Eva_Q : NetworkBehaviour
     [Networked] private TickTimer life { get; set; }
 
     private PlayerRef owner;
+    private Eva_Skill ownerSkill;  // VF 라이트 체크용
     [SerializeField] private GameObject HitVFX;
-    
-    public void Init(PlayerRef player)
+
+    public void Init(PlayerRef player, Eva_Skill skill = null)
     {
         owner = player;
-        Debug.Log($"구체의 주인 : {owner}");
+        ownerSkill = skill;
     }
     public override void Spawned()
     {
@@ -41,29 +42,35 @@ public class Eva_Q : NetworkBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
+        // 서버에서만 데미지 처리
+        if (!HasStateAuthority) return;
+
         if(other.GetComponentInParent<NetworkObject>() == null) return;
         // 주인이 맞았다면
         if (other.GetComponentInParent<NetworkObject>().InputAuthority == owner)
         {
-            Debug.Log($"구체의 오너 : {owner} || 맞은넘 : {other.GetComponentInParent<NetworkObject>().InputAuthority} ==> 내꺼니까 무시할게");
-            
             return;
         }
-        
-        Debug.Log($"구체의 오너 : {owner} || 맞은넘 : {other.GetComponentInParent<NetworkObject>().InputAuthority} ==> 데미지 줄게");
-     
+
         IDamageProcess damageProcess = other.GetComponent<IDamageProcess>();
+        var targetNO = other.GetComponentInParent<NetworkObject>();
         if (damageProcess != null && other.GetComponent<HeroState>().GetCurrHealth() > 0f)
         {
             damageProcess.OnTakeDamage(10);
-            
+
+            // VF 라이트 투사체 발사 (E 스킬 사용 후 3초 내)
+            if (ownerSkill != null && targetNO != null)
+            {
+                ownerSkill.TryApplyVFLight(targetNO);
+            }
+
             if (Runner.IsServer)
             {
                 var no = Runner.Spawn(HitVFX, other.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
                 HitVFXDestroy(no).Forget();
             }
         }
-        
+
     }
     
     public async UniTaskVoid HitVFXDestroy(NetworkObject no)
