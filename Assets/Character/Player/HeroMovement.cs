@@ -44,9 +44,16 @@ public class HeroMovement : NetworkBehaviour
     }
     
     public override void Spawned()
-    {   
+    {
         // 클라이언트 agent 비활성화
         navMeshAgent.enabled = false;
+
+        // 로컬 플레이어가 아닌 경우 AudioListener 비활성화 (중복 방지)
+        var audioListener = GetComponentInChildren<AudioListener>();
+        if (audioListener != null && !HasInputAuthority)
+        {
+            audioListener.enabled = false;
+        }
 
         if (HasInputAuthority)
         {

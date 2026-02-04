@@ -73,7 +73,7 @@ namespace EternalReturn.Menu
             var args = new StartGameArgs();
             args.CustomPhotonAppSettings = appSettings;
             args.GameMode = ResolveGameMode(connectArgs);
-            args.SessionName = SessionName = connectArgs.Session;
+            args.SessionName = SessionName = "TestSession";  // 고정 세션 이름 (테스트용)
             args.PlayerCount = MaxPlayerCount = connectArgs.MaxPlayerCount;
             
             // 추후 연결 취소 (DisconnectAsync)에 사용할 CancellationToken
@@ -172,24 +172,8 @@ namespace EternalReturn.Menu
         // GameMode를 설정하는 함수
         private GameMode ResolveGameMode(IFusionMenuConnectArgs args)
         {
-            // if (args.Creating)
-            // {
-            //     Debug.Log("Host");
-            //     return GameMode.Host;
-            // }
-            //
-            // if (string.IsNullOrEmpty(args.Session))
-            // {
-            //     Debug.Log("Quick");
-            //     return GameMode.AutoHostOrClient;
-            // }
-            // Debug.Log("Client");
-            if (args.IsServer)
-            {
-                return GameMode.Server;
-            }
-            
-            return GameMode.Client;
+            // AutoHostOrClient: 세션이 없으면 Host로 생성, 있으면 Client로 참가
+            return GameMode.AutoHostOrClient;
         }
         // 네트워크 세션을 실행할 NetworkRunner 인스턴스를 Prefab으로 생성
         private NetworkRunner CreateRunner()

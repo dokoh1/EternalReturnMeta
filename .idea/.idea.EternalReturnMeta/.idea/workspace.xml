@@ -5,9 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="21dcb24a-5212-42b0-b93e-2b22ca5c5d43" name="변경" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.EternalReturnMeta/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.EternalReturnMeta/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/Player/HeroMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/HeroMovement.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Photon/FusionMenu/Runtime/FusionMenuUIMain.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Photon/FusionMenu/Runtime/FusionMenuUIMain.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Matching/Lobby.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Matching/Lobby.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/MatchingManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/MatchingManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/MenuImplementation/MenuConnection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/MenuImplementation/MenuConnection.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ShaderGraphSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ShaderGraphSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/MultiplayerManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/MultiplayerManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,9 +23,12 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 0
-}]]></component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Photon/Fusion/Editor/Fusion.Unity.Editor.cs" root0="SKIP_HIGHLIGHTING" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
   <component name="ProjectId" id="38vEydn020pv05ZlmNjp9qe6IVN" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -27,6 +36,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "main",
@@ -104,7 +114,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1769671903419</updated>
-      <workItem from="1769671903421" duration="2659000" />
+      <workItem from="1769671903421" duration="4435000" />
+      <workItem from="1770185040857" duration="408000" />
     </task>
     <servers />
   </component>

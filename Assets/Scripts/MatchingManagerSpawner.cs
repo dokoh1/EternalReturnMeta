@@ -26,6 +26,16 @@ public class MatchingManagerSpawner : MonoBehaviour , INetworkRunnerCallbacks
     
     private bool resetInput;
 
+    private void Start()
+    {
+        // 게임 로딩 UI 초기화
+        if (GameLoadingUI.Instance == null)
+        {
+            var loadingUI = new GameObject("GameLoadingUI");
+            loadingUI.AddComponent<GameLoadingUI>();
+        }
+    }
+
     public void Initialize(NetworkRunner runner)
     {
         _runner = runner;
@@ -170,7 +180,22 @@ public class MatchingManagerSpawner : MonoBehaviour , INetworkRunnerCallbacks
     public void OnSessionListUpdated(NetworkRunner runner, List<SessionInfo> sessionList) { }
     public void OnCustomAuthenticationResponse(NetworkRunner runner, Dictionary<string, object> data) { }
     public void OnHostMigration(NetworkRunner runner, HostMigrationToken hostMigrationToken) { }
-    public void OnSceneLoadDone(NetworkRunner runner) { }
+    public void OnSceneLoadDone(NetworkRunner runner)
+    {
+        Debug.Log("[MatchingManagerSpawner] OnSceneLoadDone - Game scene loaded!");
+
+        // 로딩 UI 업데이트
+        if (GameLoadingUI.Instance != null)
+        {
+            GameLoadingUI.Instance.UpdateText("캐릭터 스폰 중...");
+        }
+
+        // MatchingManager에게 씬 로드 완료 알림
+        if (MatchingManagerInstance != null && runner.IsServer)
+        {
+            MatchingManagerInstance.IsGameSceneLoaded = true;
+        }
+    }
     public void OnSceneLoadStart(NetworkRunner runner) { }
     public void OnObjectExitAOI(NetworkRunner runner, NetworkObject obj, PlayerRef player){ }
     public void OnObjectEnterAOI(NetworkRunner runner, NetworkObject obj, PlayerRef player){ }
