@@ -112553,6 +112553,57 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1477096916
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1477096918}
+  - component: {fileID: 1477096917}
+  m_Layer: 0
+  m_Name: ControlMatricsCollector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1477096917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1477096916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f71198e2368a4540a6122498e5c83fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enableCollection: 1
+  maxMetricsPerType: 1000
+  totalInputs: 0
+  bufferedInputs: 0
+  droppedInputs: 0
+  totalCancels: 0
+  totalTimeSaved: 0
+--- !u!4 &1477096918
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1477096916}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.39624, y: -0.24999, z: 0.433}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1717275642 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 752184144510201328, guid: a9a01b53ae0735c4084b6235379d0f0d, type: 3}
@@ -112765,3 +112816,4 @@ SceneRoots:
   - {fileID: 309979194}
   - {fileID: 1987874710}
   - {fileID: 1671769498072114337}
+  - {fileID: 1477096918}

@@ -63,6 +63,7 @@ MonoBehaviour:
   - {fileID: 5610402305289320033, guid: fdbde727a0f66304f87b2eb2b4500b20, type: 3}
   navMeshAgent: {fileID: 0}
   baseSpeed: 5
+  _controlConfig: {fileID: 11400000, guid: 598494434a9c2be409982f93467c675f, type: 2}
   ClickVFX: {fileID: 1943286446490004412, guid: e953460ff16e0a6459684f9b77202b5c, type: 3}
 --- !u!114 &3015478746565745762
 MonoBehaviour:
@@ -248,6 +249,7 @@ MonoBehaviour:
   _skillW: {fileID: 6785786657642369298, guid: 214bad0ede8f76e44872a1e81cd5f1f6, type: 3}
   _skillR: {fileID: 1629214717962325, guid: 4f6ae2aac7520704abb5fba1bdb4edc4, type: 3}
   _vfLightPrefab: {fileID: 9189944147122119663, guid: 86b01d2dd98b94143829d636d924acfe, type: 3}
+  _controlConfig: {fileID: 11400000, guid: 598494434a9c2be409982f93467c675f, type: 2}
 --- !u!114 &6492763974940614161
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -6,18 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="21dcb24a-5212-42b0-b93e-2b22ca5c5d43" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.EternalReturnMeta/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.EternalReturnMeta/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Character/Player/CameraController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/CameraController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/Player/HeroAnimationController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/HeroAnimationController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Character/Player/HeroMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/HeroMovement.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Character/Player/HeroState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/HeroState.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Character/Player/Hero_Eva.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/Hero_Eva.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Character/Player/Hero_Eva/Eva.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/Hero_Eva/Eva.controller" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Character/Player/Hero_Eva/Eva_AnimationController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/Hero_Eva/Eva_AnimationController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Character/Player/Hero_Eva/Eva_Skill.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/Hero_Eva/Eva_Skill.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Character/Player/Hero_Eva/Eva_Skill/Eva_Q.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/Hero_Eva/Eva_Skill/Eva_Q.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Character/Player/Hero_Eva/Eva_Skill/Eva_R.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/Hero_Eva/Eva_Skill/Eva_R.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Character/Player/Input/HeroInput.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/Input/HeroInput.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Game_Cobalt.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Game_Cobalt.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/MatchingManagerSpawner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/MatchingManagerSpawner.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,6 +116,7 @@
       <workItem from="1770185040857" duration="408000" />
       <workItem from="1770191420686" duration="4000" />
       <workItem from="1770204709071" duration="3127000" />
+      <workItem from="1770256196424" duration="2635000" />
     </task>
     <servers />
   </component>

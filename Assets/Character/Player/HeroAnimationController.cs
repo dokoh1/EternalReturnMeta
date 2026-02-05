@@ -5,9 +5,9 @@ public class HeroAnimationController : NetworkBehaviour
 {
     [SerializeField] protected Animator animator;
     protected HeroMovement movement;
-    
+
     [Networked] protected int MoveVelocity {get; set;}
-   
+
     public override void Spawned()
     {
         movement = GetComponent<HeroMovement>();
@@ -31,7 +31,7 @@ public class HeroAnimationController : NetworkBehaviour
     {
         MoveVelocity = v;
     }
-    
+
     [Rpc(RpcSources.StateAuthority, RpcTargets.All, HostMode = RpcHostMode.SourceIsServer)]
     public void RPC_DeadProcess()
     {

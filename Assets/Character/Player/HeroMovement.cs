@@ -12,7 +12,7 @@ public class HeroMovement : NetworkBehaviour
     [SerializeField] private LayerMask groundLayer; // 바닥 레이어
 
     [SerializeField] private GameObject[] spawnSpots;
-    
+
     [HideInInspector] public NavMeshAgent navMeshAgent;
     private SimpleKCC kcc;
 
@@ -24,12 +24,12 @@ public class HeroMovement : NetworkBehaviour
     public float baseSpeed;
     private NavMeshPath path;
     private Vector3 lastPos;
-    
+
     public bool IsCastingSkill { get; set; }
     public bool IsDeath { get; set; }
     public bool IsAttacking { get; set; }  // 기본 공격 중 (이동 정지)
     public float SpeedMultiplier { get; set; } = 1.0f;  // 이동 속도 배율 (슬로우 등)
-    public bool IsAirborne { get; set; }  // 공중에 띄워진 상태
+    [Networked] public NetworkBool IsAirborne { get; set; }  // 공중에 띄워진 상태 (네트워크 동기화)
     public bool IsSlowImmune { get; set; }  // 슬로우 면역 (E 스킬)
     public bool IsPlayingSkillAnimation { get; set; }  // 스킬 애니메이션 재생 중 (이동 애니메이션 차단)
 
@@ -101,7 +101,7 @@ public class HeroMovement : NetworkBehaviour
 
         IsAirborne = false;
     }
-    
+
     [SerializeField] private GameObject ClickVFX;
     private void Awake()
     {
@@ -123,7 +123,7 @@ public class HeroMovement : NetworkBehaviour
     {
         lastPos = position;
     }
-    
+
     public override void Spawned()
     {
         // 클라이언트 agent 비활성화
@@ -144,7 +144,7 @@ public class HeroMovement : NetworkBehaviour
             var playerInfo = Runner.LocalPlayer.ToString();
             var initPos = spawnSpots[int.Parse(playerInfo[playerInfo.Length - 2].ToString()) % 2].transform.position;
             heroCameraPoint.InitPos(initPos);
-            
+
             GameObject obj = GameObject.FindWithTag("CinemachineCamera");
             cameraController._CinemachineCamera = obj.GetComponent<CinemachineCamera>();
             cameraController._CinemachineCamera.Target.TrackingTarget = heroCameraPoint.transform;
@@ -161,15 +161,15 @@ public class HeroMovement : NetworkBehaviour
             navMeshAgent.enabled = true;
         }
     }
-    
+
     private void Update()
     {
         if (!HasInputAuthority) return;
 
         if (Input.GetKeyDown(KeyCode.Mouse1))
-        {          
+        {
             var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            
+
             if (Physics.Raycast(ray, out var hit, Mathf.Infinity, LayerMask.GetMask("Ground")))
             {
                 var hitPosition      = hit.point;
@@ -178,11 +178,11 @@ public class HeroMovement : NetworkBehaviour
             }
         }
     }
-    public override void FixedUpdateNetwork() 
+    public override void FixedUpdateNetwork()
     {
         if (!HasStateAuthority)
             return;
-        
+
         PathCalculateAndMove();
     }
 
@@ -202,7 +202,7 @@ public class HeroMovement : NetworkBehaviour
             OnMoveVelocityChanged?.Invoke(0);
             return;
         }
-        
+
         if (GetInput(out heroInput))
         {
             if (heroInput.HitPosition_RightClick != Vector3.zero)
@@ -211,15 +211,15 @@ public class HeroMovement : NetworkBehaviour
             }
         }
         ButtonsPrevious = heroInput.Buttons;
-        
+
         // 길찾기 경로 계산
         navMeshAgent.CalculatePath(lastPos, path);
-        
+
         if (path.corners.Length <= 0)
-        {   //정지 애니메이션 
+        {   //정지 애니메이션
             OnMoveVelocityChanged?.Invoke(0);
         }
-        
+
         if (path.corners != null && path.corners.Length > 0)
         {
             Vector3 nextWaypoint;//
@@ -231,15 +231,15 @@ public class HeroMovement : NetworkBehaviour
             {
                 nextWaypoint = path.corners[1];
             }
-            
+
             var dist = Vector3.Distance(kcc.Position, nextWaypoint);
-            
+
             if (dist <= navMeshAgent.stoppingDistance && path.corners.Length <= 2)
             {
                 OnMoveVelocityChanged?.Invoke(0);
                 return;
             }
-            
+
             var speed = baseSpeed * SpeedMultiplier * (60f / Runner.TickRate);
             var direction = (nextWaypoint - kcc.Position).normalized;
 
@@ -260,12 +260,12 @@ public class HeroMovement : NetworkBehaviour
             {
                 OnMoveVelocityChanged?.Invoke(1);
             }
-            
+
             float targetYaw = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
             float currentPitch = kcc.GetLookRotation(true, false).x;
-            
+
             kcc.SetLookRotation(currentPitch, targetYaw);
-            
+
         }
     }
 }
