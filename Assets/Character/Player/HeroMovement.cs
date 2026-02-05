@@ -25,6 +25,19 @@ public class HeroMovement : NetworkBehaviour
     private NavMeshPath path;
     private Vector3 lastPos;
 
+    // ═══════════════════════════════════════════════════════════════
+    // 부드러운 회전 시스템
+    //
+    // 왜 CurrentYaw를 직접 관리하나?
+    // - kcc.GetLookRotation()이 SetLookRotation()과 다른 값을 반환할 수 있음
+    // - 그러면 MoveTowardsAngle이 매번 처음부터 계산해서 회전이 안됨
+    // - 직접 CurrentYaw를 관리하면 이 문제 해결
+    // ═══════════════════════════════════════════════════════════════
+    [Header("회전 설정")]
+    [SerializeField] private float rotationDegreesPerSecond = 720f;  // 초당 회전 각도 (높을수록 빠름)
+
+    [Networked] private float CurrentYaw { get; set; }  // 현재 Yaw (서버에서 관리, 네트워크 동기화)
+
     public bool IsCastingSkill { get; set; }
     public bool IsDeath { get; set; }
     public bool IsAttacking { get; set; }  // 기본 공격 중 (이동 정지)
@@ -33,13 +46,30 @@ public class HeroMovement : NetworkBehaviour
     public bool IsSlowImmune { get; set; }  // 슬로우 면역 (E 스킬)
     public bool IsPlayingSkillAnimation { get; set; }  // 스킬 애니메이션 재생 중 (이동 애니메이션 차단)
 
-    // 에어본 적용 (외부에서 호출)
+    // 에어본 적용 (외부에서 호출 - 서버에서만)
     public void ApplyAirborne(float height, float duration)
     {
+        if (!HasStateAuthority) return;  // 서버에서만 실행
         if (IsAirborne) return;  // 이미 에어본 중이면 무시
+
+        // 서버에서 에어본 실행
         DoAirborne(height, duration).Forget();
+
+        // 모든 클라이언트에 에어본 시각 효과 전송
+        RPC_PlayAirborneVisual(height, duration);
     }
 
+    // 모든 클라이언트에서 에어본 시각 효과 재생
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    private void RPC_PlayAirborneVisual(float height, float duration)
+    {
+        // 서버는 이미 DoAirborne에서 처리하므로 클라이언트만 실행
+        if (HasStateAuthority) return;
+
+        DoAirborneVisual(height, duration).Forget();
+    }
+
+    // 서버용: 실제 상태 + 시각 효과
     private async UniTaskVoid DoAirborne(float height, float duration)
     {
         IsAirborne = true;
@@ -102,6 +132,56 @@ public class HeroMovement : NetworkBehaviour
         IsAirborne = false;
     }
 
+    // 클라이언트용: 시각 효과만 (로컬 위치 애니메이션)
+    private async UniTaskVoid DoAirborneVisual(float height, float duration)
+    {
+        // 클라이언트에서도 KCC 비활성화해야 위치 애니메이션이 덮어쓰이지 않음
+        bool wasKccEnabled = kcc.enabled;
+        kcc.enabled = false;
+
+        Vector3 originalPos = transform.position;
+        int frameDelay = 20;
+
+        // 위로 올라가기 (0.3초)
+        int liftFrames = 15;
+        for (int i = 1; i <= liftFrames; i++)
+        {
+            if (this == null) return;
+            float t = (float)i / liftFrames;
+            float easedT = t * t;
+            Vector3 newPos = originalPos + new Vector3(0, height * easedT, 0);
+            transform.position = newPos;
+            await UniTask.Delay(frameDelay);
+        }
+
+        // 공중 유지
+        int holdTime = (int)(duration * 1000) - 550;
+        if (holdTime > 50)
+        {
+            await UniTask.Delay(50);
+        }
+
+        if (this == null) return;
+
+        // 아래로 내려오기 (0.3초)
+        Vector3 topPos = transform.position;
+        int dropFrames = 15;
+        for (int i = 1; i <= dropFrames; i++)
+        {
+            if (this == null) return;
+            float t = (float)i / dropFrames;
+            float easedT = t * t;
+            Vector3 newPos = Vector3.Lerp(topPos, originalPos, easedT);
+            transform.position = newPos;
+            await UniTask.Delay(frameDelay);
+        }
+
+        transform.position = originalPos;
+
+        // KCC 다시 활성화
+        kcc.enabled = wasKccEnabled;
+    }
+
     [SerializeField] private GameObject ClickVFX;
     private void Awake()
     {
@@ -159,6 +239,9 @@ public class HeroMovement : NetworkBehaviour
             lastPos = initPos;
             kcc.SetPosition(initPos);
             navMeshAgent.enabled = true;
+
+            // 초기 회전값 설정
+            CurrentYaw = kcc.GetLookRotation(true, false).y;
         }
     }
 
@@ -261,11 +344,40 @@ public class HeroMovement : NetworkBehaviour
                 OnMoveVelocityChanged?.Invoke(1);
             }
 
+            // ═══════════════════════════════════════════════════════════════
+            // 부드러운 회전 (Smooth Rotation)
+            //
+            // CurrentYaw를 직접 관리하는 이유:
+            // - kcc.GetLookRotation()이 우리가 설정한 값과 다를 수 있음
+            // - 직접 관리하면 매 프레임 정확한 보간 가능
+            // ═══════════════════════════════════════════════════════════════
             float targetYaw = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
             float currentPitch = kcc.GetLookRotation(true, false).x;
 
-            kcc.SetLookRotation(currentPitch, targetYaw);
+            // 현재 Yaw에서 목표 Yaw로 일정 속도로 회전
+            CurrentYaw = Mathf.MoveTowardsAngle(CurrentYaw, targetYaw, rotationDegreesPerSecond * Runner.DeltaTime);
 
+            kcc.SetLookRotation(currentPitch, CurrentYaw);
         }
+    }
+
+    // ═══════════════════════════════════════════════════════════════
+    // Render: 클라이언트에서 회전 적용
+    //
+    // CurrentYaw가 [Networked]이므로 서버 값이 자동 동기화됨
+    // 클라이언트는 동기화된 CurrentYaw를 KCC에 적용
+    // ═══════════════════════════════════════════════════════════════
+    public override void Render()
+    {
+        // 서버는 FixedUpdateNetwork에서 이미 처리
+        if (HasStateAuthority) return;
+
+        // 에어본 중에는 회전 스킵
+        if (IsAirborne) return;
+
+        // 클라이언트: 네트워크에서 받은 CurrentYaw 적용
+        float currentPitch = kcc.GetLookRotation(true, false).x;
+
+        kcc.SetLookRotation(currentPitch, CurrentYaw);
     }
 }

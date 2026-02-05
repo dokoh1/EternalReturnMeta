@@ -502,13 +502,13 @@ public class Eva_Skill : HeroSkill
     }
 
     // VF 라이트 투사체 발사 (스킬 히트 시 호출)
+    // 참고: 이 메서드는 Eva_Q, Eva_W 등에서 호출됨
     public void TryApplyVFLight(NetworkObject target)
     {
-        // StateAuthority 체크: 서버에서만 스폰 (중복 생성 방지)
-        if (!HasStateAuthority) return;
         if (!IsVFLightReady) return;
         if (target == null) return;
         if (_vfLightPrefab == null) return;
+        if (Runner == null || !Runner.IsServer) return;  // 서버(Host)에서만 스폰
 
         // VF 라이트 투사체 스폰 (내 위치에서 타겟으로)
         Vector3 spawnPos = transform.position + Vector3.up;
