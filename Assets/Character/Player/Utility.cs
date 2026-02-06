@@ -1,19 +1,146 @@
+// ═══════════════════════════════════════════════════════════════════════════════════════════════════════
+// Utility.cs - 공통 유틸리티 함수
+// ═══════════════════════════════════════════════════════════════════════════════════════════════════════
+//
+// ┌─────────────────────────────────────────────────────────────────────────────────────────────────────┐
+// │ 개요 (Overview)                                                                                      │
+// │                                                                                                       │
+// │ 이 파일은 프로젝트 전반에서 사용되는 공통 유틸리티 함수를 모아둡니다.                                 │
+// │ 현재는 CancellationTokenSource 갱신 함수만 포함합니다.                                               │
+// │                                                                                                       │
+// │ 핵심 기술:                                                                                            │
+// │ 1. CancellationTokenSource - 비동기 작업 취소 메커니즘                                               │
+// │ 2. ref 파라미터 - 호출자의 변수를 직접 수정                                                          │
+// │ 3. static class - 인스턴스 없이 사용 가능한 유틸리티                                                 │
+// └─────────────────────────────────────────────────────────────────────────────────────────────────────┘
+//
+// ┌─────────────────────────────────────────────────────────────────────────────────────────────────────┐
+// │ 설계 철학 (Design Philosophy)                                                                        │
+// │                                                                                                       │
+// │ Q: CancellationTokenSource가 뭔가요?                                                                 │
+// │ A: async/await 비동기 작업을 취소하는 메커니즘.                                                        │
+// │                                                                                                       │
+// │    [사용 예시]                                                                                        │
+// │    CancellationTokenSource cts = new CancellationTokenSource();                                      │
+// │    await DoSomethingAsync(cts.Token);  // Token 전달                                                 │
+// │    cts.Cancel();  // 취소 신호 보내기                                                                │
+// │                                                                                                       │
+// │    [비동기 메서드 내부]                                                                               │
+// │    async Task DoSomethingAsync(CancellationToken token) {                                            │
+// │        while (!token.IsCancellationRequested) {                                                      │
+// │            // 작업 수행                                                                               │
+// │            await Task.Delay(100, token);  // 취소되면 예외 발생                                      │
+// │        }                                                                                              │
+// │    }                                                                                                  │
+// │                                                                                                       │
+// │ Q: 왜 RefreshToken이 필요한가요?                                                                     │
+// │ A: CancellationTokenSource는 한 번 취소하면 재사용 불가.                                               │
+// │    새 작업을 시작하려면 새 CTS를 만들어야 함.                                                         │
+// │    이전 CTS는 Dispose해서 리소스 해제해야 함.                                                         │
+// │    이 과정을 한 함수로 묶음.                                                                         │
+// │                                                                                                       │
+// │ Q: 왜 ref 파라미터를 사용하나요?                                                                     │
+// │ A: 호출자의 CTS 변수를 직접 새 인스턴스로 교체하기 위해.                                               │
+// │    ref 없으면 복사본만 교체되고 호출자 변수는 그대로.                                                 │
+// │                                                                                                       │
+// │    [ref 없이]                                                                                         │
+// │    void RefreshToken(CancellationTokenSource _cts) {                                                 │
+// │        _cts = new CancellationTokenSource();  // 지역 변수만 변경                                    │
+// │    }                                                                                                  │
+// │    // 호출자의 cts는 여전히 이전 값                                                                   │
+// │                                                                                                       │
+// │    [ref 사용]                                                                                         │
+// │    void RefreshToken(ref CancellationTokenSource _cts) {                                             │
+// │        _cts = new CancellationTokenSource();  // 호출자 변수 직접 변경                               │
+// │    }                                                                                                  │
+// │    // 호출자의 cts가 새 인스턴스로 교체됨                                                             │
+// └─────────────────────────────────────────────────────────────────────────────────────────────────────┘
+//
+// ┌─────────────────────────────────────────────────────────────────────────────────────────────────────┐
+// │ 사용 예시 (Usage Example)                                                                            │
+// │                                                                                                       │
+// │ [Eva_Skill.cs에서]                                                                                   │
+// │                                                                                                       │
+// │ private CancellationTokenSource _cts_Q;                                                               │
+// │                                                                                                       │
+// │ void Skill_Q() {                                                                                     │
+// │     // 이전 Q 스킬 취소하고 새 CTS 생성                                                               │
+// │     Utility.RefreshToken(ref _cts_Q);                                                                │
+// │                                                                                                       │
+// │     // 새 토큰으로 비동기 작업 시작                                                                   │
+// │     ProcessSkill_Q(_cts_Q.Token).Forget();                                                           │
+// │ }                                                                                                     │
+// │                                                                                                       │
+// │ async UniTask ProcessSkill_Q(CancellationToken token) {                                              │
+// │     try {                                                                                             │
+// │         await UniTask.Delay(500, cancellationToken: token);  // 취소되면 예외                        │
+// │         // 스킬 로직...                                                                               │
+// │     } catch (OperationCanceledException) {                                                           │
+// │         // 정상적인 취소, 무시                                                                        │
+// │     }                                                                                                 │
+// │ }                                                                                                     │
+// └─────────────────────────────────────────────────────────────────────────────────────────────────────┘
+//
+// ═══════════════════════════════════════════════════════════════════════════════════════════════════════
+
 using System.Threading;
 
-public static class Utility 
+// ═══════════════════════════════════════════════════════════════════════════════════════════════════════
+// Utility 정적 클래스
+// ═══════════════════════════════════════════════════════════════════════════════════════════════════════
+//
+// 역할:
+// - 프로젝트 공통 유틸리티 함수 제공
+// - 인스턴스 없이 Utility.MethodName()으로 호출
+//
+// static class:
+// - 인스턴스화 불가 (new Utility() 불가)
+// - 모든 멤버가 static이어야 함
+// - 유틸리티/헬퍼 함수에 적합
+//
+// ═══════════════════════════════════════════════════════════════════════════════════════════════════════
+public static class Utility
 {
-   public static void RefreshToken(ref CancellationTokenSource _cts)
-   {
-      if (_cts != null)
-      {  // 토큰이 취소요청 했다면
-         if (!_cts.IsCancellationRequested)
-         {
-            _cts.Cancel();
-         }
-         _cts.Dispose();
-      }
-      
-      _cts = new CancellationTokenSource();
-   }
-   
+    // ═══════════════════════════════════════════════════════════════════════════════════════════════════
+    // RefreshToken() - CancellationTokenSource 갱신
+    // ═══════════════════════════════════════════════════════════════════════════════════════════════════
+    //
+    // 역할:
+    // 1. 기존 CTS가 있으면 취소 후 Dispose
+    // 2. 새 CTS 생성해서 호출자 변수에 할당
+    //
+    // 파라미터:
+    // - ref CancellationTokenSource _cts: 갱신할 CTS (참조로 전달)
+    //
+    // 처리 순서:
+    // 1. null 체크 - 첫 호출 시 null일 수 있음
+    // 2. 아직 취소 안 됐으면 취소 요청 (Cancel)
+    // 3. 리소스 해제 (Dispose)
+    // 4. 새 인스턴스 생성
+    //
+    // 왜 IsCancellationRequested 체크?
+    // - 이미 취소된 CTS에 Cancel() 호출해도 문제없지만
+    // - 명시적으로 체크하는 게 의도가 명확
+    //
+    // Dispose() 중요성:
+    // - CTS는 내부적으로 unmanaged 리소스 사용
+    // - Dispose 안 하면 메모리 누수
+    // - using 문 사용 불가 (수명이 메서드 범위 초과)
+    // ═══════════════════════════════════════════════════════════════════════════════════════════════════
+    public static void RefreshToken(ref CancellationTokenSource _cts)
+    {
+        if (_cts != null)
+        {
+            // 아직 취소 안 됐으면 취소 요청
+            if (!_cts.IsCancellationRequested)
+            {
+                _cts.Cancel();
+            }
+            // 리소스 해제
+            _cts.Dispose();
+        }
+
+        // 새 CTS 생성
+        _cts = new CancellationTokenSource();
+    }
 }

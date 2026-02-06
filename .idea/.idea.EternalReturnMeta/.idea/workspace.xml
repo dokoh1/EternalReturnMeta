@@ -6,12 +6,25 @@
   <component name="ChangeListManager">
     <list default="true" id="21dcb24a-5212-42b0-b93e-2b22ca5c5d43" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.EternalReturnMeta/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.EternalReturnMeta/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/Player/CameraController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/CameraController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/Player/ClickAnimation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/ClickAnimation.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Character/Player/HeroAnimationController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/HeroAnimationController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/Player/HeroCameraPoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/HeroCameraPoint.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Character/Player/HeroMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/HeroMovement.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Character/Player/Hero_Eva.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/Hero_Eva.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/Player/HeroSkill.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/HeroSkill.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/Player/HeroState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/HeroState.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Character/Player/Hero_Eva/Eva_AnimationController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/Hero_Eva/Eva_AnimationController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Character/Player/Hero_Eva/Eva_Skill.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/Hero_Eva/Eva_Skill.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Game_Cobalt.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Game_Cobalt.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/Player/Hero_Eva/Eva_Skill/Eva_Q.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/Hero_Eva/Eva_Skill/Eva_Q.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/Player/Hero_Eva/Eva_Skill/Eva_R.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/Hero_Eva/Eva_Skill/Eva_R.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/Player/Hero_Eva/Eva_Skill/Eva_VFLight.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/Hero_Eva/Eva_Skill/Eva_VFLight.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/Player/Hero_Eva/Eva_Skill/Eva_W.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/Hero_Eva/Eva_Skill/Eva_W.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/Player/Hero_Eva/Eva_State.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/Hero_Eva/Eva_State.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/Player/IDamageProcess.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/IDamageProcess.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/Player/Input/HeroInput.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/Input/HeroInput.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/Player/MouseController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/MouseController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/Player/System_Test.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/System_Test.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/Player/Utility.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/Utility.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,7 +35,9 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/736853e102274be182fc6b6babc3746a12800/ed/68144f54/SimpleKCC.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Photon/Fusion/Editor/Fusion.Unity.Editor.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.veriorpies.parrelsync@256065af1fc7/Editor/ClonesManager.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0
@@ -53,6 +68,18 @@
       <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\6000.1.1f1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath D:\EternalReturnMeta\EternalReturnMeta -testResults Logs/results.xml -logFile Logs/Editor.log -testPlatform EditMode -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="D:\EternalReturnMeta\EternalReturnMeta" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <option name="ENV_FILE_PATHS" value="" />
+      <option name="REDIRECT_INPUT_PATH" value="" />
+      <option name="PTY_MODE" value="Auto" />
+      <option name="MIXED_MODE_DEBUG" value="0" />
+      <method v="2" />
+    </configuration>
+    <configuration name="독립실행형 플레이어" type="RunUnityExe" factoryName="Unity Executable">
+      <option name="EXE_PATH" value="$USER_HOME$/Desktop/Unity_EternalReturn\EternalReturn_Meta.exe" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="C:\Users\aa\Desktop\Unity_EternalReturn" />
       <option name="PASS_PARENT_ENVS" value="1" />
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <option name="ENV_FILE_PATHS" value="" />
@@ -116,7 +143,9 @@
       <workItem from="1770185040857" duration="408000" />
       <workItem from="1770191420686" duration="4000" />
       <workItem from="1770204709071" duration="3127000" />
-      <workItem from="1770256196424" duration="2635000" />
+      <workItem from="1770256196424" duration="9852000" />
+      <workItem from="1770291237171" duration="4000" />
+      <workItem from="1770366227295" duration="4061000" />
     </task>
     <servers />
   </component>
