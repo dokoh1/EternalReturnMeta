@@ -6,10 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="21dcb24a-5212-42b0-b93e-2b22ca5c5d43" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.EternalReturnMeta/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.EternalReturnMeta/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Character/Player/CameraController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/CameraController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Character/Player/ClickAnimation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/ClickAnimation.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Character/Player/HeroAnimationController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/HeroAnimationController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Character/Player/HeroCameraPoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/HeroCameraPoint.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Character/Player/HeroMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/HeroMovement.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Character/Player/HeroSkill.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/HeroSkill.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Character/Player/HeroState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/HeroState.cs" afterDir="false" />
@@ -19,12 +15,8 @@
       <change beforePath="$PROJECT_DIR$/Assets/Character/Player/Hero_Eva/Eva_Skill/Eva_R.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/Hero_Eva/Eva_Skill/Eva_R.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Character/Player/Hero_Eva/Eva_Skill/Eva_VFLight.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/Hero_Eva/Eva_Skill/Eva_VFLight.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Character/Player/Hero_Eva/Eva_Skill/Eva_W.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/Hero_Eva/Eva_Skill/Eva_W.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Character/Player/Hero_Eva/Eva_State.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/Hero_Eva/Eva_State.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Character/Player/IDamageProcess.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/IDamageProcess.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/Player/Hero_Eva/Eva_Skill/Skill_Q_Object.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/Hero_Eva/Eva_Skill/Skill_Q_Object.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Character/Player/Input/HeroInput.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/Input/HeroInput.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Character/Player/MouseController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/MouseController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Character/Player/System_Test.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/System_Test.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Character/Player/Utility.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/Utility.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,6 +28,8 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/736853e102274be182fc6b6babc3746a12800/ed/68144f54/SimpleKCC.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/c516bd83fe6f424dbfb8227cda3ba19528800/86/fa8865fa/ParticleSystem.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/8a522b806eac9bb894e6e4c5fe87f353457535e769447e79c6b396beecb5d0/System.Threading.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Photon/Fusion/Editor/Fusion.Unity.Editor.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.veriorpies.parrelsync@256065af1fc7/Editor/ClonesManager.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -145,7 +139,11 @@
       <workItem from="1770204709071" duration="3127000" />
       <workItem from="1770256196424" duration="9852000" />
       <workItem from="1770291237171" duration="4000" />
-      <workItem from="1770366227295" duration="4061000" />
+      <workItem from="1770366227295" duration="10538000" />
+      <workItem from="1770513201528" duration="1830000" />
+      <workItem from="1770800490143" duration="689000" />
+      <workItem from="1770812320916" duration="7065000" />
+      <workItem from="1770823421065" duration="1146000" />
     </task>
     <servers />
   </component>

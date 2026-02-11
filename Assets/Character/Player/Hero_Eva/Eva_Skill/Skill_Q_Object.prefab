@@ -71,6 +71,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HitVFX: {fileID: 5024009746357069194, guid: ec3f674830402cc45bce805cf6493db7, type: 3}
+  UseActiveInitDelay: 0
 --- !u!135 &-222984505715240020
 SphereCollider:
   m_ObjectHideFlags: 0
