@@ -67,7 +67,7 @@ Photon Fusion 2를 활용한 네트워크 전투 시스템의 구현 과정과 �
 
 ## 시연 영상
 
-[![시연 영상](https://img.youtube.com/vi/h3mvi6VwY7Q/0.jpg)](https://youtu.be/h3mvi6VwY7Q)
+[![시연 영상](https://img.youtube.com/vi/IFPHIg6JN2Y/0.jpg)](https://youtu.be/IFPHIg6JN2Y)
 
 ## 소개
 
