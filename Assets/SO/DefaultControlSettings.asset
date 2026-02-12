@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DefaultControlSettings
   m_EditorClassIdentifier: 
   EnableInputBuffering: 1
-  EnableAnimationCanceling: 0
+  EnableAnimationCanceling: 1
   EnableAccelerationCurves: 1
   BufferDuration: 0.3
   MaxBufferSize: 2
@@ -67,4 +67,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  EnableLocalFeedback: 1
+  EnableExtrapolation: 1
+  MaxExtrapolationTime: 0.15
+  EnableLagCompensation: 1
   CancelWindowStartRatio: 0.4

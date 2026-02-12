@@ -47,6 +47,22 @@ namespace Character.Player.ControlSettings
         [Tooltip("감속 커브 (0=최대속도, 1=정지)")]
         public AnimationCurve DecelerationCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
 
+        [Header("=== Network Feedback ===")]
+        [Tooltip("로컬 피드백 활성화 (InputAuthority에서 스킬 애니메이션 즉시 재생)")]
+        public bool EnableLocalFeedback = false;
+
+        [Header("=== Extrapolation Settings ===")]
+        [Tooltip("외삽 활성화 (원격 플레이어 위치 예측)")]
+        public bool EnableExtrapolation = false;
+
+        [Tooltip("최대 외삽 시간 (초)")]
+        [Range(0.05f, 0.3f)]
+        public float MaxExtrapolationTime = 0.15f;
+
+        [Header("=== Lag Compensation ===")]
+        [Tooltip("지연 보상 활성화 (Fusion LagCompensation 히트 판정)")]
+        public bool EnableLagCompensation = false;
+
         [Header("=== Animation Canceling Settings ===")]
         [Tooltip("캔슬 가능 시작 시점 (스킬 시전 시간 대비 비율)")]
         [Range(0.3f, 0.7f)]
@@ -60,6 +76,10 @@ namespace Character.Player.ControlSettings
             EnableInputBuffering = true;
             EnableAnimationCanceling = true;
             EnableAccelerationCurves = true;
+            EnableLocalFeedback = false;
+            EnableExtrapolation = false;
+            MaxExtrapolationTime = 0.15f;
+            EnableLagCompensation = false;
 
             BufferDuration = 0.3f;
             MaxBufferSize = 2;
@@ -80,6 +100,9 @@ namespace Character.Player.ControlSettings
             EnableInputBuffering = false;
             EnableAnimationCanceling = false;
             EnableAccelerationCurves = false;
+            EnableLocalFeedback = false;
+            EnableExtrapolation = false;
+            EnableLagCompensation = false;
         }
 
         /// <summary>
@@ -90,6 +113,9 @@ namespace Character.Player.ControlSettings
             EnableInputBuffering = true;
             EnableAnimationCanceling = true;
             EnableAccelerationCurves = true;
+            EnableLocalFeedback = true;
+            EnableExtrapolation = true;
+            EnableLagCompensation = true;
         }
     }
 }

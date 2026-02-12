@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Character.Player;
+using Character.Player.ControlSettings;
 using Cysharp.Threading.Tasks;
 using Fusion;
 using UnityEngine;
@@ -23,7 +24,10 @@ public class Eva_W : NetworkBehaviour
     [SerializeField] private float duration = 1.0f;
     [SerializeField] private float airborneDuration = 1.0f;
 
+    [SerializeField] private ControlSettingsConfig _controlConfig;
+
     private HashSet<HeroMovement> affectedTargets = new();
+    private List<LagCompensatedHit> _lagHits = new();
 
     public void Init(PlayerRef player, Eva_Skill skill = null)
     {
@@ -122,8 +126,17 @@ public class Eva_W : NetworkBehaviour
         affectedTargets.Clear();
     }
 
+    private bool UseLagComp() => _controlConfig != null && _controlConfig.EnableLagCompensation
+                                && Runner != null && Runner.LagCompensation != null;
+
     private void DealDamageToAllInRange(float damage)
     {
+        if (UseLagComp())
+        {
+            DealDamageToAllInRange_LagComp(damage);
+            return;
+        }
+
         Collider[] hits = Physics.OverlapSphere(transform.position, skillRadius, LayerMask.GetMask("Character"));
 
         foreach (var hit in hits)
@@ -153,8 +166,46 @@ public class Eva_W : NetworkBehaviour
         }
     }
 
+    private void DealDamageToAllInRange_LagComp(float damage)
+    {
+        _lagHits.Clear();
+        Runner.LagCompensation.OverlapSphere(transform.position, skillRadius, owner, _lagHits,
+            LayerMask.GetMask("Character"));
+
+        foreach (var hit in _lagHits)
+        {
+            var targetNO = hit.Hitbox?.Root?.GetComponentInParent<NetworkObject>();
+            if (targetNO == null || targetNO.InputAuthority == owner) continue;
+
+            var damageProcess = targetNO.GetComponentInChildren<IDamageProcess>();
+            var heroState = targetNO.GetComponentInChildren<HeroState>();
+
+            if (damageProcess != null && heroState != null && heroState.GetCurrHealth() > 0f)
+            {
+                damageProcess.OnTakeDamage(damage);
+
+                if (ownerSkill != null)
+                {
+                    ownerSkill.TryApplyVFLight(targetNO);
+                }
+
+                if (Runner.IsServer && HitVFX != null)
+                {
+                    var vfx = Runner.Spawn(HitVFX, targetNO.transform.position + Vector3.up, Quaternion.identity);
+                    HitVFXDestroy(vfx).Forget();
+                }
+            }
+        }
+    }
+
     private void ApplyAirborneToCenter()
     {
+        if (UseLagComp())
+        {
+            ApplyAirborneToCenter_LagComp();
+            return;
+        }
+
         Collider[] hits = Physics.OverlapSphere(transform.position, centerRadius, LayerMask.GetMask("Character"));
 
         foreach (var hit in hits)
@@ -164,6 +215,25 @@ public class Eva_W : NetworkBehaviour
             if (IsOwner(targetNO)) continue;
 
             var targetMovement = hit.GetComponentInParent<HeroMovement>();
+            if (targetMovement != null)
+            {
+                targetMovement.ApplyAirborne(AirborneHeight, airborneDuration);
+            }
+        }
+    }
+
+    private void ApplyAirborneToCenter_LagComp()
+    {
+        _lagHits.Clear();
+        Runner.LagCompensation.OverlapSphere(transform.position, centerRadius, owner, _lagHits,
+            LayerMask.GetMask("Character"));
+
+        foreach (var hit in _lagHits)
+        {
+            var targetNO = hit.Hitbox?.Root?.GetComponentInParent<NetworkObject>();
+            if (targetNO == null || targetNO.InputAuthority == owner) continue;
+
+            var targetMovement = targetNO.GetComponentInChildren<HeroMovement>();
             if (targetMovement != null)
             {
                 targetMovement.ApplyAirborne(AirborneHeight, airborneDuration);

@@ -55,11 +55,10 @@
   * [이동 속도와 틱 레이트 보정](#이동-속도와-틱-레이트-보정)
   * [위치 보간](#위치-보간)
   * [클릭 VFX](#클릭-vfx)
-- [더 나아가서](#더-나아가서)
-  * [실제 이터널 리턴과의 차이](#실제-이터널-리턴과의-차이)
-  * [Dedicated Server](#dedicated-server)
-  * [조작감](#조작감)
-  * [Lag Compensation](#lag-compensation)
+- [Part 8. 네트워크 조작감 개선](#part-8-네트워크-조작감-개선)
+  * [Local Feedback — 로컬 피드백](#local-feedback--로컬-피드백)
+  * [Extrapolation — 외삽](#extrapolation--외삽)
+  * [Lag Compensation — 지연 보상](#lag-compensation--지연-보상)
 
 ---
 
@@ -73,7 +72,7 @@ Photon Fusion 2를 활용한 네트워크 전투 시스템의 구현 과정과 �
 
 본 프로젝트는 이터널 리턴(Eternal Return)을 레퍼런스로 한 MOBA 전투 시스템이다.
 
-"서버가 모든 판정을 담당한다"는 원칙 아래, 캐릭터 이동 / 스킬 4종(Q, W, E, R) / 기본 공격 / 데미지 처리 / 애니메이션 동기화를 구현하였으며, 거기에 더해 Input Buffering과 Animation Canceling을 통한 조작감 개선 시스템도 포함되어 있다.
+"서버가 모든 판정을 담당한다"는 원칙 아래, 캐릭터 이동 / 스킬 4종(Q, W, E, R) / 기본 공격 / 데미지 처리 / 애니메이션 동기화를 구현하였으며, Input Buffering과 Animation Canceling을 통한 조작감 개선, 그리고 Local Feedback / Extrapolation / Lag Compensation을 통한 네트워크 조작감 개선 시스템도 포함되어 있다.
 
 ### 함께 사용된 라이브러리
 
@@ -97,6 +96,8 @@ Part 5. 전투 시스템 상세에서는 데미지 인터페이스(IDamageProces
 Part 6. 조작감 개선 시스템에서는 Input Buffering과 Animation Canceling이 왜 필요한지, 그리고 이를 어떻게 설계하고 구현했는지를 설명한다.
 
 Part 7. 이동 시스템에서는 NavMeshAgent와 SimpleKCC를 왜 조합해서 사용했는지, 경로 계산과 이동 판정의 상세 흐름, 회전 동기화, 틱 레이트 보정, 그리고 다른 플레이어가 부드럽게 보이기 위한 위치 보간 처리까지를 다룬다.
+
+Part 8. 네트워크 조작감 개선에서는 Server-Authoritative 모델에서 발생하는 입력 지연, 원격 플레이어 위치 지연, 히트 판정 어긋남 문제를 해결하기 위한 세 가지 기법(Local Feedback, Extrapolation, Lag Compensation)을 다룬다.
 
 ---
 
@@ -908,5 +909,277 @@ public override void Render()
 ```
 
 여기서 `positionLerpSpeed`는 15로 설정되어 있다. 이 값이 너무 낮으면 캐릭터가 서버 위치를 늦게 따라가서 지연이 느껴지고, 너무 높으면 위치가 순간이동처럼 튀어 보인다.
+
+---
+
+# Part 8. 네트워크 조작감 개선
+
+Server-Authoritative 모델은 치팅 방지에 강력하지만, 모든 판정이 서버를 거치기 때문에 네트워크 지연(Latency)이 그대로 조작감에 영향을 미친다.
+
+본 파트에서는 이 문제를 해결하기 위해 도입한 세 가지 기법을 다룬다. 세 기능 모두 `ControlSettingsConfig`에서 ON/OFF 토글이 가능하여 적용 전후를 비교할 수 있다.
+
+| 기법 | 해결하는 문제 | 영향 범위 |
+|------|-------------|----------|
+| Local Feedback | 내 스킬 애니메이션이 늦게 보임 | 자기 화면 |
+| Extrapolation | 상대 캐릭터가 뒤처져 보임 | 상대 화면 |
+| Lag Compensation | 내 화면에서 맞았는데 서버에서 빗나감 | 히트 판정 |
+
+> **참고:** 세 기능 모두 네트워크 지연이 존재하는 환경(2대 이상의 PC에서 접속)에서 효과가 체감된다. 호스트로 플레이하는 경우 StateAuthority와 InputAuthority가 동일하므로 보정할 지연이 없다.
+
+## Local Feedback — 로컬 피드백
+
+### 문제
+
+기존 구조에서는 스킬 애니메이션이 서버를 거쳐 RPC로 돌아온 뒤에야 재생된다.
+
+```
+기존 흐름:
+  입력 → 서버 도달 → 서버 처리 → RPC 수신 → 애니메이션 재생
+  |←─────────── 왕복 지연 (RTT) ──────────→|
+
+개선 후:
+  입력 → 로컬 애니메이션 즉시 재생  (지연 0)
+       → 서버에 전송 → 서버가 RPC로 다른 클라에 전파
+                       (내 클라에서는 이미 재생했으므로 스킵)
+```
+
+클라이언트의 RTT가 60ms라면, 기존에는 스킬을 눌러도 약 60ms 후에야 애니메이션이 시작된다. 로컬 피드백을 적용하면 입력 즉시 애니메이션이 재생되어 체감 반응성이 크게 개선된다.
+
+### 구현 — InputAuthority 로컬 예측
+
+핵심 아이디어는 InputAuthority(클라이언트)가 서버 응답을 기다리지 않고 애니메이션을 먼저 재생하고, 서버에서 온 RPC는 중복 재생을 방지하는 것이다.
+
+**Eva_Skill — 로컬 예측 블록**
+
+`FixedUpdateNetwork()`에서 기존 서버 로직(`HasStateAuthority`) 앞에 로컬 예측 블록을 추가했다.
+
+```csharp
+public override void FixedUpdateNetwork()
+{
+    // 로컬 피드백: InputAuthority에서 애니메이션 즉시 재생
+    if (HasInputAuthority && !HasStateAuthority && IsLocalFeedbackEnabled()
+        && !Runner.IsResimulation)
+    {
+        if (GetInput(out HeroInput localInput))
+        {
+            PredictLocalAnimations(localInput);
+        }
+    }
+
+    if (!HasStateAuthority) return;
+    // ... 기존 서버 코드 ...
+}
+```
+
+여기서 `!Runner.IsResimulation` 가드가 중요하다. Fusion은 서버 상태가 도착하면 과거 틱을 재시뮬레이션(Resimulation)하는데, 이때 예측 애니메이션이 다시 실행되면 타이밍이 꼬일 수 있다. 이 가드로 최초 시뮬레이션에서만 예측이 동작하도록 제한한다.
+
+`PredictLocalAnimations()`는 현재 상태(에어본, 사망, 시전 중)를 확인한 뒤, 이번 틱에 새로 눌린 스킬 버튼에 대해 로컬 애니메이션을 즉시 재생한다.
+
+```csharp
+private void PredictLocalAnimations(HeroInput input)
+{
+    if (heroMovement.IsAirborne || heroMovement.IsDeath)
+    { _localButtonsPrevious = input.Buttons; return; }
+
+    if (IsCasting && !_isRActive)
+    { _localButtonsPrevious = input.Buttons; return; }
+
+    if (input.Buttons.WasPressed(_localButtonsPrevious, InputButton.SkillQ) && !IsUsingSkillE)
+        animationController.Local_Skill_Q();
+
+    // W, E, R도 동일 패턴...
+    _localButtonsPrevious = input.Buttons;
+}
+```
+
+이 로직이 가능하려면 `IsCasting`과 `_isRActive`를 InputAuthority도 읽을 수 있어야 한다. 기존에는 일반 필드였지만, `[Networked]`로 변경하여 서버 값이 클라이언트에 자동 동기화되도록 했다.
+
+```csharp
+// 변경 전
+private bool IsCasting;
+private bool _isRActive { get; set; }
+
+// 변경 후
+[Networked] private NetworkBool IsCasting { get; set; }
+[Networked] private NetworkBool _isRActive { get; set; }
+```
+
+**Eva_AnimationController — RPC 중복 재생 방지**
+
+로컬에서 이미 재생한 애니메이션이 RPC로 다시 도착했을 때 이중 재생을 방지해야 한다. `ShouldSkipRpc()`를 통해 "로컬 피드백이 활성화된 InputAuthority 클라이언트"에서는 RPC 애니메이션을 건너뛴다.
+
+```csharp
+public bool IsLocalFeedbackActive { get; set; }
+
+private bool ShouldSkipRpc()
+{
+    return IsLocalFeedbackActive && Object != null && Object.HasInputAuthority;
+}
+
+[Rpc(RpcSources.StateAuthority, RpcTargets.All, HostMode = RpcHostMode.SourceIsServer)]
+public void RPC_Multi_Skill_Q()
+{
+    if (ShouldSkipRpc()) return;  // 로컬에서 이미 재생함
+    animator.SetTrigger("tSkill01");
+}
+```
+
+`E_End`, `BasicAttack`, `CancelBasicAttack`, `CancelSkillAnimation`은 서버 로직에 의해 트리거되는 것이므로 가드를 적용하지 않는다. 이 RPC들은 클라이언트가 예측할 수 없는 서버 판정 결과이기 때문이다.
+
+## Extrapolation — 외삽
+
+### 문제
+
+Part 7에서 다룬 위치 보간(Lerp)은 상대 캐릭터의 끊김을 줄여주지만, 근본적으로 **마지막으로 받은 서버 위치를 향해 따라가는** 방식이다. 즉 항상 한 틱 이상 뒤처진 위치를 보여주게 된다.
+
+```
+보간만 사용:
+  서버 위치:   A ─── B ─── C ─── D
+  화면 표시:     A ── B ── C ──      (항상 한 틱 뒤)
+
+외삽 추가:
+  서버 위치:   A ─── B ─── C ─── D
+  예측 위치:     B' ── C' ── D' ──   (속도 기반 예측으로 실시간에 가까움)
+```
+
+### 구현 — 속도 기반 위치 예측
+
+서버에서 현재 이동 속도(`NetworkedVelocity`)를 `[Networked]`로 동기화하고, 클라이언트의 `Render()`에서 이 속도를 기반으로 다음 위치를 예측한다.
+
+**HeroMovement — 속도 동기화**
+
+```csharp
+[Networked] private Vector3 NetworkedVelocity { get; set; }
+
+// PathCalculateAndMove()에서:
+kcc.Move(direction * speed);
+NetworkedVelocity = direction * speed;  // 이동 중: 현재 속도 동기화
+
+// 정지하는 모든 분기에서:
+NetworkedVelocity = Vector3.zero;       // 정지 시: 속도 0
+```
+
+**HeroMovement — Render()에서 외삽 적용**
+
+```csharp
+public override void Render()
+{
+    if (HasStateAuthority) return;
+    // ...
+    Vector3 targetPos;
+    bool useExtrapolation = _controlConfig != null && _controlConfig.EnableExtrapolation
+                            && NetworkedVelocity.sqrMagnitude > 0.01f;
+
+    if (useExtrapolation)
+    {
+        float extTime = Mathf.Min(Runner.DeltaTime, _controlConfig.MaxExtrapolationTime);
+        targetPos = NetworkedPosition + NetworkedVelocity * extTime;
+    }
+    else
+    {
+        targetPos = NetworkedPosition;  // 정지 중이면 기존 보간만
+    }
+
+    Vector3 smoothed = Vector3.Lerp(kcc.Position, targetPos, positionLerpSpeed * Time.deltaTime);
+    kcc.SetPosition(smoothed);
+}
+```
+
+외삽 시간에 상한(`MaxExtrapolationTime`, 기본 0.15초)을 두어 급정지나 방향전환 시 오버슈팅을 최소화한다. 속도가 0에 가까워지면(`sqrMagnitude > 0.01f` 불충족) 자동으로 기존 보간 방식으로 복귀한다.
+
+## Lag Compensation — 지연 보상
+
+### 문제
+
+Server-Authoritative 모델에서 히트 판정은 서버가 처리한다. 문제는 서버가 판정하는 시점의 캐릭터 위치가 클라이언트 화면과 다를 수 있다는 것이다.
+
+```
+클라이언트 화면:                    서버 시점:
+  내 투사체 → ● 적                   내 투사체 →    ● 적
+               ↑ 여기서 맞음!                       ↑ 이미 지나감
+
+  클라이언트에서는 맞았는데          서버에서는 RTT만큼 적이 이미 이동했으므로
+  서버에서는 빗나가는 현상 발생      판정이 어긋남
+```
+
+### 구현 — Fusion LagCompensation API
+
+Fusion은 각 캐릭터의 `Hitbox` 위치를 과거 N틱 동안 기록(버퍼링)해두고, `Runner.LagCompensation.OverlapSphere()`를 호출하면 해당 클라이언트의 지연만큼 시간을 되감아서 판정한다. 이를 통해 클라이언트 화면과 서버 판정이 일치하게 된다.
+
+기존 Unity Physics 경로와 Fusion LagCompensation 경로를 이중으로 유지하여, 토글 하나로 전환할 수 있도록 설계했다.
+
+**Eva_Q — 투사체 히트 판정**
+
+```csharp
+public override void FixedUpdateNetwork()
+{
+    if (life.Expired(Runner)) { Runner.Despawn(Object); return; }
+    transform.position += ProjectileSpeed * transform.forward * Runner.DeltaTime;
+
+    // Lag Compensation ON이면 Fusion 쿼리로 판정
+    if (HasStateAuthority && UseLagComp())
+        CheckLagCompensatedHit();
+}
+
+private void CheckLagCompensatedHit()
+{
+    _lagHits.Clear();
+    Runner.LagCompensation.OverlapSphere(
+        transform.position, _hitRadius, owner, _lagHits,
+        LayerMask.GetMask("Character"));
+
+    foreach (var hit in _lagHits)
+    {
+        var targetNO = hit.Hitbox?.Root?.GetComponentInParent<NetworkObject>();
+        if (targetNO == null || targetNO.InputAuthority == owner) continue;
+
+        // 데미지 처리 + VFX (기존과 동일)
+        Runner.Despawn(Object);
+        return;
+    }
+}
+
+private void OnTriggerEnter(Collider other)
+{
+    if (!HasStateAuthority || UseLagComp()) return;  // Lag Comp ON이면 기존 경로 스킵
+    // ... 기존 Unity Physics 판정 ...
+}
+```
+
+Lag Compensation을 사용할 때는 `SphereCollider`를 비활성화하고 Fusion의 `OverlapSphere`로 대체한다. 이중 판정이 발생하지 않도록 `OnTriggerEnter`에서도 `UseLagComp()` 체크를 추가했다.
+
+**Eva_W — 범위 장판**
+
+W 스킬의 생성 시 데미지(`DealDamageToAllInRange`)와 종료 시 에어본(`ApplyAirborneToCenter`)에도 동일한 이중 경로 패턴을 적용했다.
+
+```csharp
+private void DealDamageToAllInRange(float damage)
+{
+    if (UseLagComp())
+    {
+        // Fusion LagCompensation 경로
+        Runner.LagCompensation.OverlapSphere(transform.position, skillRadius, owner, _lagHits, ...);
+        // ...
+        return;
+    }
+
+    // 기존 Unity Physics 경로
+    Collider[] hits = Physics.OverlapSphere(transform.position, skillRadius, ...);
+    // ...
+}
+```
+
+슬로우 적용/해제(`OnTriggerEnter`/`OnTriggerExit`)는 지속적으로 범위를 체크하는 로직이므로 지연 보상의 효과가 미미하여 기존 방식을 유지한다.
+
+### 프리팹 설정
+
+Lag Compensation이 동작하려면 다음 설정이 필요하다.
+
+1. **캐릭터 프리팹**에 `HitboxRoot` 컴포넌트 추가 (루트에)
+2. 캐릭터 본체에 `Hitbox` 컴포넌트 추가 (Type: Sphere, 기존 Collider 반경 매칭)
+3. `NetworkProjectConfig`에서 `HitboxBufferSize > 0` 설정
+4. 스킬 프리팹(Eva_Q, Eva_W)에 `ControlSettingsConfig` 할당
+
+스킬 오브젝트 자체에는 Hitbox가 필요 없다. Hitbox는 **맞는 대상**(캐릭터)에만 붙이면 된다. 스킬은 `OverlapSphere`로 주변의 Hitbox를 **탐색하는 주체**이다.
 
 ---

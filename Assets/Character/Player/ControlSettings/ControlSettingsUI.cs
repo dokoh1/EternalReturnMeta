@@ -197,6 +197,17 @@ namespace Character.Player.ControlSettings
                 GUILayout.Toggle(false, " Acceleration Curves (롤백됨 - MOBA 부적합)");
                 GUI.enabled = true;
 
+                GUILayout.Space(5);
+
+                _config.EnableLocalFeedback = GUILayout.Toggle(
+                    _config.EnableLocalFeedback, " Local Feedback (스킬 애니메이션 즉시 재생)");
+
+                _config.EnableExtrapolation = GUILayout.Toggle(
+                    _config.EnableExtrapolation, " Extrapolation (원격 플레이어 위치 예측)");
+
+                _config.EnableLagCompensation = GUILayout.Toggle(
+                    _config.EnableLagCompensation, " Lag Compensation (지연 보상 히트 판정)");
+
                 GUILayout.Space(10);
 
                 // 전체 ON/OFF 버튼
@@ -205,11 +216,17 @@ namespace Character.Player.ControlSettings
                 {
                     _config.EnableInputBuffering = true;
                     _config.EnableAnimationCanceling = true;
+                    _config.EnableLocalFeedback = true;
+                    _config.EnableExtrapolation = true;
+                    _config.EnableLagCompensation = true;
                 }
                 if (GUILayout.Button("모두 끄기"))
                 {
                     _config.EnableInputBuffering = false;
                     _config.EnableAnimationCanceling = false;
+                    _config.EnableLocalFeedback = false;
+                    _config.EnableExtrapolation = false;
+                    _config.EnableLagCompensation = false;
                 }
                 GUILayout.EndHorizontal();
             }

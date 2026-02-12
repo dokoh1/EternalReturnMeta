@@ -93,6 +93,7 @@ MonoBehaviour:
   centerRadius: 1.5
   duration: 1
   airborneDuration: 1
+  _controlConfig: {fileID: 11400000, guid: 598494434a9c2be409982f93467c675f, type: 2}
 --- !u!135 &5154060434444568915
 SphereCollider:
   m_ObjectHideFlags: 0

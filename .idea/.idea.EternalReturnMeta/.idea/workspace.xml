@@ -6,17 +6,19 @@
   <component name="ChangeListManager">
     <list default="true" id="21dcb24a-5212-42b0-b93e-2b22ca5c5d43" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.EternalReturnMeta/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.EternalReturnMeta/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/Player/ControlSettings/ControlSettingsConfig.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/ControlSettings/ControlSettingsConfig.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/Player/ControlSettings/ControlSettingsUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/ControlSettings/ControlSettingsUI.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Character/Player/HeroMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/HeroMovement.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Character/Player/HeroSkill.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/HeroSkill.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Character/Player/HeroState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/HeroState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/Player/Hero_Eva.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/Hero_Eva.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Character/Player/Hero_Eva/Eva_AnimationController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/Hero_Eva/Eva_AnimationController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Character/Player/Hero_Eva/Eva_Skill.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/Hero_Eva/Eva_Skill.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Character/Player/Hero_Eva/Eva_Skill/Eva_Q.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/Hero_Eva/Eva_Skill/Eva_Q.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Character/Player/Hero_Eva/Eva_Skill/Eva_R.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/Hero_Eva/Eva_Skill/Eva_R.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Character/Player/Hero_Eva/Eva_Skill/Eva_VFLight.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/Hero_Eva/Eva_Skill/Eva_VFLight.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Character/Player/Hero_Eva/Eva_Skill/Eva_W.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/Hero_Eva/Eva_Skill/Eva_W.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Character/Player/Hero_Eva/Eva_Skill/Skill_Q_Object.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/Hero_Eva/Eva_Skill/Skill_Q_Object.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Character/Player/Input/HeroInput.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/Input/HeroInput.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Character/Player/Hero_Eva/Eva_Skill/Skill_W.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Player/Hero_Eva/Eva_Skill/Skill_W.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Photon/Fusion/Resources/NetworkProjectConfig.fusion" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Photon/Fusion/Resources/NetworkProjectConfig.fusion" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SO/DefaultControlSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SO/DefaultControlSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -143,7 +145,8 @@
       <workItem from="1770513201528" duration="1830000" />
       <workItem from="1770800490143" duration="689000" />
       <workItem from="1770812320916" duration="7065000" />
-      <workItem from="1770823421065" duration="1146000" />
+      <workItem from="1770823421065" duration="3701000" />
+      <workItem from="1770852222148" duration="913000" />
     </task>
     <servers />
   </component>

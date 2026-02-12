@@ -57,12 +57,12 @@ public class Eva_Skill : HeroSkill
 
     private Vector3 _skillDirection {get; set;}
 
-    private bool IsCasting;
+    [Networked] private NetworkBool IsCasting { get; set; }
 
     private HeroMovement heroMovement;
     private Eva_AnimationController animationController;
 
-    private bool _isRActive { get; set;}
+    [Networked] private NetworkBool _isRActive { get; set; }
 
     [Networked] private Vector3 skillR_Dir { get; set; }
 
@@ -85,6 +85,11 @@ public class Eva_Skill : HeroSkill
         heroMovement = GetComponent<HeroMovement>();
         animationController = GetComponent<Eva_AnimationController>();
 
+        if (HasInputAuthority && !HasStateAuthority)
+        {
+            animationController.IsLocalFeedbackActive = IsLocalFeedbackEnabled();
+        }
+
         if (_controlConfig != null)
         {
             _inputBuffer = new InputBuffer(_controlConfig);
@@ -96,8 +101,19 @@ public class Eva_Skill : HeroSkill
         }
     }
 
+    private NetworkButtons _localButtonsPrevious;
+
     public override void FixedUpdateNetwork()
     {
+        if (HasInputAuthority && !HasStateAuthority && IsLocalFeedbackEnabled()
+            && !Runner.IsResimulation)
+        {
+            if (GetInput(out HeroInput localInput))
+            {
+                PredictLocalAnimations(localInput);
+            }
+        }
+
         if (!HasStateAuthority)
             return;
 
@@ -673,5 +689,42 @@ public class Eva_Skill : HeroSkill
         }
         if (input.Buttons.WasReleased(ButtonsPrevious, InputButton.SkillR))
             ButtonsPreviousR = 0;
+    }
+
+    private void PredictLocalAnimations(HeroInput input)
+    {
+        if (heroMovement.IsAirborne || heroMovement.IsDeath)
+        {
+            _localButtonsPrevious = input.Buttons;
+            return;
+        }
+
+        if (IsCasting && !_isRActive)
+        {
+            _localButtonsPrevious = input.Buttons;
+            return;
+        }
+
+        if (input.Buttons.WasPressed(_localButtonsPrevious, InputButton.SkillQ) && !IsUsingSkillE)
+            animationController.Local_Skill_Q();
+
+        if (input.Buttons.WasPressed(_localButtonsPrevious, InputButton.SkillW) && !IsUsingSkillE)
+            animationController.Local_Skill_W();
+
+        if (input.Buttons.WasPressed(_localButtonsPrevious, InputButton.SkillE))
+            animationController.Local_Skill_E();
+
+        if (input.Buttons.WasPressed(_localButtonsPrevious, InputButton.SkillR) && !IsUsingSkillE)
+        {
+            if (!_isRActive) animationController.Local_Skill_R_Activate();
+            else animationController.Local_Skill_R_Deactivate();
+        }
+
+        _localButtonsPrevious = input.Buttons;
+    }
+
+    private bool IsLocalFeedbackEnabled()
+    {
+        return _controlConfig != null && _controlConfig.EnableLocalFeedback;
     }
 }

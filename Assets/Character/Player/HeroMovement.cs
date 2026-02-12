@@ -1,4 +1,5 @@
 using System;
+using Character.Player.ControlSettings;
 using Cysharp.Threading.Tasks;
 using Fusion;
 using Fusion.Addons.SimpleKCC;
@@ -25,10 +26,14 @@ public class HeroMovement : NetworkBehaviour
     [Networked] private float CurrentYaw { get; set; }
     [Networked] private Vector3 NetworkedPosition { get; set; }
     [Networked] public NetworkBool IsAirborne { get; set; }
+    [Networked] private Vector3 NetworkedVelocity { get; set; }
 
     [Header("회전 설정")]
     [SerializeField] private float rotationDegreesPerSecond = 720f;
     [SerializeField] private float positionLerpSpeed = 15f;
+
+    [Header("=== Control Settings ===")]
+    [SerializeField] private ControlSettingsConfig _controlConfig;
 
     private HeroInput heroInput;
     public event Action<int> OnMoveVelocityChanged;
@@ -128,6 +133,7 @@ public class HeroMovement : NetworkBehaviour
         if (IsDeath)
         {
             if (kcc.enabled) kcc.ResetVelocity();
+            NetworkedVelocity = Vector3.zero;
             OnMoveVelocityChanged?.Invoke(0);
             return;
         }
@@ -175,6 +181,7 @@ public class HeroMovement : NetworkBehaviour
 
             if (dist <= navMeshAgent.stoppingDistance && path.corners.Length <= 2)
             {
+                NetworkedVelocity = Vector3.zero;
                 OnMoveVelocityChanged?.Invoke(0);
                 return;
             }
@@ -185,10 +192,12 @@ public class HeroMovement : NetworkBehaviour
             if (!IsCastingSkill && !IsAttacking && !IsAirborne && kcc.enabled)
             {
                 kcc.Move(direction * speed);
+                NetworkedVelocity = direction * speed;
             }
             else
             {
                 if (kcc.enabled) kcc.ResetVelocity();
+                NetworkedVelocity = Vector3.zero;
                 OnMoveVelocityChanged?.Invoke(0);
                 return;
             }
@@ -223,10 +232,23 @@ public class HeroMovement : NetworkBehaviour
 
         if (NetworkedPosition != Vector3.zero)
         {
-            Vector3 currentPos = kcc.Position;
+            Vector3 targetPos;
+            bool useExtrapolation = _controlConfig != null && _controlConfig.EnableExtrapolation
+                                    && NetworkedVelocity.sqrMagnitude > 0.01f;
+
+            if (useExtrapolation)
+            {
+                float extTime = Mathf.Min(Runner.DeltaTime, _controlConfig.MaxExtrapolationTime);
+                targetPos = NetworkedPosition + NetworkedVelocity * extTime;
+            }
+            else
+            {
+                targetPos = NetworkedPosition;
+            }
+
             Vector3 smoothedPosition = Vector3.Lerp(
-                currentPos,
-                NetworkedPosition,
+                kcc.Position,
+                targetPos,
                 positionLerpSpeed * Time.deltaTime
             );
             kcc.SetPosition(smoothedPosition);
