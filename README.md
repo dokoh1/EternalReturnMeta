@@ -65,6 +65,10 @@
 
 Photon Fusion 2를 활용한 네트워크 전투 시스템의 구현 과정과 설계 방법을 공유한다.
 
+## 시연 영상
+
+[![시연 영상](https://img.youtube.com/vi/h3mvi6VwY7Q/0.jpg)](https://youtu.be/h3mvi6VwY7Q)
+
 ## 소개
 
 본 프로젝트는 이터널 리턴(Eternal Return)을 레퍼런스로 한 MOBA 전투 시스템이다.
